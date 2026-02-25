@@ -3,52 +3,24 @@
   "WorkspaceRootPath": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\assets\\scripts\\holescaler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\holescaler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|c:\\study\\unity\\repos\\ijunior-torture-firstproject-blackhole\\assets\\scripts\\game\\level\\time\\pauser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game\\level\\time\\pauser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|c:\\study\\unity\\repos\\ijunior-torture-firstproject-blackhole\\assets\\scripts\\holestats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\holestats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\assets\\scripts\\test\\moneyaddertest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\test\\moneyaddertest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\assets\\scripts\\scriptableobjects\\holedefaultstats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\scriptableobjects\\holedefaultstats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\assets\\scripts\\game\\bootstrapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game\\bootstrapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\assets\\scripts\\hole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\hole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\assets\\scripts\\utils\\timerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\utils\\timerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\assets\\scripts\\services\\moverservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\services\\moverservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\assets\\scripts\\interfaces\\imovable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interfaces\\imovable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\assets\\ujoystick\\content\\script\\core\\joystick.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\ujoystick\\content\\script\\core\\joystick.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\assets\\ujoystick\\content\\script\\internal\\joystickutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\ujoystick\\content\\script\\internal\\joystickutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\assets\\scripts\\holetriggerhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\holetriggerhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Library\\PackageCache\\com.unity.ugui@1.0.0\\Runtime\\EventSystem\\InputModules\\BaseInput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.ugui@1.0.0\\Runtime\\EventSystem\\InputModules\\BaseInput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\assets\\shaders\\map.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\shaders\\map.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\assets\\shaders\\hole.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\shaders\\hole.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\assets\\scripts\\game\\level\\time\\timer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3347BAE7-B722-F774-91E8-31B46DCF6093}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\game\\level\\time\\timer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,151 +34,66 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "HoleDefaultStats.cs",
-              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\ScriptableObjects\\HoleDefaultStats.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\ScriptableObjects\\HoleDefaultStats.cs",
-              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\ScriptableObjects\\HoleDefaultStats.cs",
-              "RelativeToolTip": "Assets\\Scripts\\ScriptableObjects\\HoleDefaultStats.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBYAAAApAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "Timer.cs",
+              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Game\\Level\\Time\\Timer.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\Level\\Time\\Timer.cs",
+              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Game\\Level\\Time\\Timer.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Game\\Level\\Time\\Timer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-11T15:01:43.384Z",
+              "WhenOpened": "2026-02-23T11:43:58.253Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TimerService.cs",
+              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Utils\\TimerService.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Utils\\TimerService.cs",
+              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Utils\\TimerService.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Utils\\TimerService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T11:53:31.015Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Pauser.cs",
+              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Game\\Level\\Time\\Pauser.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\Level\\Time\\Pauser.cs",
+              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Game\\Level\\Time\\Pauser.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Game\\Level\\Time\\Pauser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T12:17:09.434Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "HoleStats.cs",
-              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\HoleStats.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\HoleStats.cs",
-              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\HoleStats.cs",
-              "RelativeToolTip": "Assets\\Scripts\\HoleStats.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
+              "Title": "MoneyAdderTest.cs",
+              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Test\\MoneyAdderTest.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Test\\MoneyAdderTest.cs",
+              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Test\\MoneyAdderTest.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Test\\MoneyAdderTest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-11T14:55:43.025Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-23T12:06:34.455Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HoleScaler.cs",
-              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\HoleScaler.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\HoleScaler.cs",
-              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\HoleScaler.cs",
-              "RelativeToolTip": "Assets\\Scripts\\HoleScaler.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwB0AAAAeAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "Bootstrapper.cs",
+              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Game\\Bootstrapper.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Game\\Bootstrapper.cs",
+              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Game\\Bootstrapper.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Game\\Bootstrapper.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAwDgAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-11T14:40:36.649Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Joystick.cs",
-              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\UJoystick\\Content\\Script\\Core\\Joystick.cs",
-              "RelativeDocumentMoniker": "Assets\\UJoystick\\Content\\Script\\Core\\Joystick.cs",
-              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\UJoystick\\Content\\Script\\Core\\Joystick.cs",
-              "RelativeToolTip": "Assets\\UJoystick\\Content\\Script\\Core\\Joystick.cs",
-              "ViewState": "AgIAAIkAAAAAAAAAAAAswIsAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-09T09:11:24.194Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "JoystickUtils.cs",
-              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\UJoystick\\Content\\Script\\Internal\\JoystickUtils.cs",
-              "RelativeDocumentMoniker": "Assets\\UJoystick\\Content\\Script\\Internal\\JoystickUtils.cs",
-              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\UJoystick\\Content\\Script\\Internal\\JoystickUtils.cs",
-              "RelativeToolTip": "Assets\\UJoystick\\Content\\Script\\Internal\\JoystickUtils.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAxwA4AAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-09T08:58:24.703Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "BaseInput.cs",
-              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Library\\PackageCache\\com.unity.ugui@1.0.0\\Runtime\\EventSystem\\InputModules\\BaseInput.cs",
-              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.ugui@1.0.0\\Runtime\\EventSystem\\InputModules\\BaseInput.cs",
-              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Library\\PackageCache\\com.unity.ugui@1.0.0\\Runtime\\EventSystem\\InputModules\\BaseInput.cs",
-              "RelativeToolTip": "Library\\PackageCache\\com.unity.ugui@1.0.0\\Runtime\\EventSystem\\InputModules\\BaseInput.cs",
-              "ViewState": "AgIAAHEAAAAAAAAAAAAnwH0AAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-07T07:35:20.921Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IMovable.cs",
-              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Interfaces\\IMovable.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Interfaces\\IMovable.cs",
-              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Interfaces\\IMovable.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Interfaces\\IMovable.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T08:03:28.602Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MoverService.cs",
-              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Services\\MoverService.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Services\\MoverService.cs",
-              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Services\\MoverService.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Services\\MoverService.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T08:00:07.826Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Hole.cs",
-              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Hole.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Hole.cs",
-              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\Hole.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Hole.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T07:59:37.03Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "HoleTriggerHandler.cs",
-              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\HoleTriggerHandler.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\HoleTriggerHandler.cs",
-              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Scripts\\HoleTriggerHandler.cs",
-              "RelativeToolTip": "Assets\\Scripts\\HoleTriggerHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-26T13:46:15.964Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Map.shader",
-              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Shaders\\Map.shader",
-              "RelativeDocumentMoniker": "Assets\\Shaders\\Map.shader",
-              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Shaders\\Map.shader",
-              "RelativeToolTip": "Assets\\Shaders\\Map.shader",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
-              "WhenOpened": "2026-01-26T08:50:11.182Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Hole.shader",
-              "DocumentMoniker": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Shaders\\Hole.shader",
-              "RelativeDocumentMoniker": "Assets\\Shaders\\Hole.shader",
-              "ToolTip": "C:\\Study\\Unity\\Repos\\IJunior-Torture-FirstProject-BlackHole\\Assets\\Shaders\\Hole.shader",
-              "RelativeToolTip": "Assets\\Shaders\\Hole.shader",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
-              "WhenOpened": "2026-01-26T08:28:07.552Z"
+              "WhenOpened": "2026-02-23T10:38:48.236Z"
             }
           ]
         }
