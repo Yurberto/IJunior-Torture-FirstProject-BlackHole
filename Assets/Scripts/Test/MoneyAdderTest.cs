@@ -1,22 +1,23 @@
-﻿using Assets.Scripts.MoneyClasses;
+﻿using Assets.Scripts.WalletSystem;
 using Assets.Scripts.Game;
 using UnityEngine;
 using UnityEngine.UI;
+using Assets.Scripts.AbilityNew;
 
 namespace Assets.Scripts.Test
 {
     internal class MoneyAdderTest : MonoBehaviour
     {
         [SerializeField] private Button _button;
-        [SerializeField] private float _amount;
+        [SerializeField] private int _amount;
 
-        private Money _money;
-        private PlayerStats _playerStats;
+        private Wallet _wallet;
+        private Ability _money;
 
-        public void Init(Money money, PlayerStats playerStats)
+        public void Init(Wallet wallet, Ability money)
         {
+            _wallet = wallet;
             _money = money;
-            _playerStats = playerStats;
             Debug.Log("Удали потом");
 
             _button.onClick.AddListener(Add);
@@ -25,7 +26,7 @@ namespace Assets.Scripts.Test
         private void Add()
         {
             Debug.Log($"Add_moneyAdder");
-            _money.Add((int)(_amount * _playerStats.MoneyRatio));
+            _wallet.Add((int)(_amount * _money.Ratio));
         }
     }
 }

@@ -1,81 +1,69 @@
-﻿using Assets.Scripts.Hole;
-using Assets.Scripts.Ability;
-using Assets.Scripts.Game.ScriptableObjects;
-using UnityEngine;
+﻿using Assets.Scripts.AbilityNew;
+using Assets.Scripts.AbilityNew.ScriptableObjects;
+using Assets.Scripts.Hole;
 using Assets.Scripts.Test;
-using Assets.Scripts.MoneyClasses;
-using Assets.Scripts.Game.Level;
+using Assets.Scripts.WalletSystem;
+using UnityEngine;
 
 namespace Assets.Scripts.Game
 {
     public class Bootstrapper : MonoBehaviour
     {
-        // Привести все в порядок
-        [Header("HoleView")]
+        [Header("Ability")]
+        [SerializeField] private BaseAbilityStats _startSizeBaseStats;
+        [SerializeField] private BaseAbilityStats _scaleBaseStats;
+        [SerializeField] private BaseAbilityStats _moneyBaseStats;
+        [Space]
+        [SerializeField] private AbilityView _startSizeView;
+        [SerializeField] private AbilityView _scaleView;
+        [SerializeField] private AbilityView _moneyView;
+        [Space]
+        [SerializeField] private AbilityUpgraderView _abilityUpgraderView;
+
+        [Header("Hole")]
         [SerializeField] private HoleScaler _holeScaler;
         [SerializeField] private HoleMover _holeMover;
         [SerializeField] private Absorber _absorber;
 
-        [Header("AbilityView")]
-        [SerializeField] private AbilityUpgrader _abilityUpgrader;
-        [SerializeField] private AbilityCostView _abilityCostView;
-        [SerializeField] private AbilityLevelView _abilityLevelView;
+        [Header("Wallet")]
+        [SerializeField] private WalletView _walletView;
+        [SerializeField] private MoneyAdderTest _moneyAdderTest;
 
-        [Header("MoneyView")]
-        [SerializeField] private MoneyView _moneyView;
+        private Ability _startSize;
 
-        [Header("ScriptableObjects")]
-        [SerializeField] private DefaultPlayerStats _defaultPlayerStats;
-        [SerializeField] private DefaultAbilityCosts _defaultAbilityCosts;
+        private Ability _scale;
+        private Ability _money;
 
-        [Header("Timer")]
-        [SerializeField] private Timer _timer;
+        private AbilityUpgrader _abilityUpgrader;
 
-        [Header("Test")]
-        [SerializeField] private MoneyAdderTest _adder; // Test
-
-        private PlayerStats _playerStats;
-        private Money _money;
-
-        private AbilityLevel _abilityLevel;
-        private AbilityCost _abilityCost;
+        private Wallet _wallet;
 
         private void Awake()
         {
-            _playerStats = new PlayerStats(_defaultPlayerStats);
-            _playerStats.Reset();
+            _startSize = new Ability(_startSizeBaseStats);
+            _scale = new Ability(_scaleBaseStats);
+            _money = new Ability(_moneyBaseStats);
 
-            _money = new Money(0);
-            _abilityLevel = new AbilityLevel(1, 1, 1);
-            _abilityCost = new AbilityCost(_defaultAbilityCosts, _abilityLevel);
-
-            _holeScaler.Init(_playerStats);
-            _holeMover.Init();
-            
-            _abilityUpgrader.Init(_playerStats, _money, _abilityCost, _abilityLevel);
-            _abilityCostView.Init(_abilityLevel, _abilityCost);
-            _abilityLevelView.Init(_abilityLevel);  
-
-            _adder.Init(_money, _playerStats); // Test
+            _startSizeView.Init(_startSize);
+            _scaleView.Init(_scale);
             _moneyView.Init(_money);
 
-            _timer.Init();
-            _timer.StartTimer(10);
+            _wallet = new Wallet(0);
+            _walletView.Init(_wallet);
+            _moneyAdderTest.Init(_wallet, _money);
 
-            _absorber.FallingObjectAbsorbed += _playerStats.OnObjectAbsorbed;
+            _abilityUpgrader = new AbilityUpgrader(_startSize, _scale, _money, _wallet);
+            _abilityUpgraderView.Init(_abilityUpgrader);
+
+            _holeScaler.Init(_startSize, _scale, _absorber);
+            _holeMover.Init();
+
         }
 
         private void OnDestroy()
         {
+            _abilityUpgraderView.Dispose();
             _holeScaler.Dispose();
-
-            _abilityUpgrader?.Dispose();
-            _abilityCostView?.Dispose();
-            _abilityLevelView?.Dispose();
-
-            _moneyView?.Dispose();
-
-            _absorber.FallingObjectAbsorbed -= _playerStats.OnObjectAbsorbed;
         }
     }
 }
