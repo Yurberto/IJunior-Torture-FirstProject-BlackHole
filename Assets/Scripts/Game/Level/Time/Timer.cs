@@ -3,7 +3,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace Assets.Scripts.Game.Level
+namespace Assets.Scripts.Game
 {
     public class Timer : MonoBehaviour
     {
