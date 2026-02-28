@@ -24,13 +24,15 @@ namespace Assets.Scripts.Game
         [SerializeField] private HoleScaler _holeScaler;
         [SerializeField] private HoleMover _holeMover;
         [SerializeField] private Absorber _absorber;
+        [SerializeField] private AbsorbSetting _absorbSetting;
 
         [Header("Wallet")]
         [SerializeField] private WalletView _walletView;
         [SerializeField] private MoneyAdderTest _moneyAdderTest;
 
-        private Ability _startSize;
+        private AbsorbHandler _absorbHandler;
 
+        private Ability _startSize;
         private Ability _scale;
         private Ability _money;
 
@@ -40,6 +42,9 @@ namespace Assets.Scripts.Game
 
         private void Awake()
         {
+            _absorbHandler = new AbsorbHandler(_absorbSetting);
+            _absorber.Init(_absorbHandler);
+
             _startSize = new Ability(_startSizeBaseStats);
             _scale = new Ability(_scaleBaseStats);
             _money = new Ability(_moneyBaseStats);
@@ -55,7 +60,7 @@ namespace Assets.Scripts.Game
             _abilityUpgrader = new AbilityUpgrader(_startSize, _scale, _money, _wallet);
             _abilityUpgraderView.Init(_abilityUpgrader);
 
-            _holeScaler.Init(_startSize, _scale, _absorber);
+            _holeScaler.Init(_startSize, _scale, _absorbHandler);
             _holeMover.Init();
 
         }

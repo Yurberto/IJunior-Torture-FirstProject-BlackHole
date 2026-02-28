@@ -18,31 +18,31 @@ namespace Assets.Scripts.Hole
         private Ability _startSize;
         private Ability _scale;
 
-        private Absorber _absorber;
+        private AbsorbHandler _absorbHandler;
 
-        public void Init(Ability startSize, Ability scale, Absorber absorber)
+        public void Init(Ability startSize, Ability scale, AbsorbHandler absorbHandler)
         {
             if (startSize == null)
                 throw new ArgumentNullException(nameof(startSize));
             if (scale == null)
                 throw new ArgumentNullException(nameof(scale));
-            if (absorber == null)
-                throw new ArgumentNullException(nameof(absorber));
+            if (absorbHandler == null)
+                throw new ArgumentNullException(nameof(absorbHandler));
 
             _startSize = startSize;
             _scale = scale;
-            _absorber = absorber;
+            _absorbHandler = absorbHandler;
 
             _currentSize = _startSize.Ratio;
 
             _startSize.LevelUp += OnStartSizeLevelUp;
-            _absorber.FallingObjectAbsorbed += OnFallingObjectAbsorbed;
+            _absorbHandler.RequiredMassReached += OnRequiredMassAbsorbed;
         }
 
         public void Dispose()
         {
             _startSize.LevelUp -= OnStartSizeLevelUp;
-            _absorber.FallingObjectAbsorbed += OnFallingObjectAbsorbed;
+            _absorbHandler.RequiredMassReached += OnRequiredMassAbsorbed;
         }
 
         private void OnStartSizeLevelUp()
@@ -51,9 +51,9 @@ namespace Assets.Scripts.Hole
             UpdateSize();
         }
 
-        private void OnFallingObjectAbsorbed(float mass)
+        private void OnRequiredMassAbsorbed()
         {
-            _currentSize += _scale.Ratio * mass;
+            _currentSize *= _scale.Ratio;
             UpdateSize();
         }
 

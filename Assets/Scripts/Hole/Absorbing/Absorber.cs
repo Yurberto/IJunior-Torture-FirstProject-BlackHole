@@ -8,7 +8,15 @@ namespace Assets.Scripts.Hole
     {
         [SerializeField] private LayersData _layersData;
 
-        public event Action<float> FallingObjectAbsorbed;
+        AbsorbHandler _absorbHandler;
+
+        public void Init(AbsorbHandler absorbHandler)
+        {
+            if (absorbHandler == null) 
+                throw new ArgumentNullException(nameof(absorbHandler));
+
+            _absorbHandler = absorbHandler;
+        }
 
         private void OnTriggerExit(Collider other)
         {
@@ -18,8 +26,8 @@ namespace Assets.Scripts.Hole
 
                 if (otherGameObject.layer == _layersData.FallingObject)
                 {
-                    FallingObjectAbsorbed?.Invoke(rigidbody.mass);
-                    Debug.Log("Absorber_FallingObjectAbsorbed.Invoke()");
+                    _absorbHandler.Handle(rigidbody.mass);
+                    Debug.Log("Absorber_OnTriggerExit");
                 }
 
                 otherGameObject.SetActive(false);
