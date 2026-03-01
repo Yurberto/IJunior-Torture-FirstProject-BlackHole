@@ -33,6 +33,7 @@ namespace Assets.Scripts.Hole
             {
                 _currentAbsorbMass = 0;
                 RequiredMassReached?.Invoke();
+                _levelOfRequirings++;
             }
 
             AbsorptionProgressChanged?.Invoke(_currentAbsorbMass / requiringMass);
