@@ -6,8 +6,8 @@ namespace Assets.Scripts.Hole
     {
         private AbsorbSetting _absorbSetting;
 
-        private float _currentAbsorbMass = 0;
-        private float _requiringLevel = 1;
+        private float _currentAbsorbMass;
+        private float _levelOfRequirings;
 
         public AbsorbHandler(AbsorbSetting absorbSetting)
         {
@@ -15,9 +15,11 @@ namespace Assets.Scripts.Hole
                 throw new ArgumentNullException(nameof(absorbSetting));
 
             _absorbSetting = absorbSetting;
+            Reset();
         }
 
         public event Action RequiredMassReached;
+        public event Action<float> AbsorptionProgressChanged;
 
         public void Handle(float mass)
         {
@@ -25,17 +27,23 @@ namespace Assets.Scripts.Hole
                 throw new ArgumentOutOfRangeException(nameof(mass));
 
             _currentAbsorbMass += mass;
+            float requiringMass = _absorbSetting.UpScaleMass * _levelOfRequirings;
 
-            if (_currentAbsorbMass >= _absorbSetting.UpScaleMass * _requiringLevel)
+            if (_currentAbsorbMass >= requiringMass)
             {
                 _currentAbsorbMass = 0;
                 RequiredMassReached?.Invoke();
             }
+
+            AbsorptionProgressChanged?.Invoke(_currentAbsorbMass / requiringMass);
         }
 
         public void Reset()
         {
-            _requiringLevel = 1;
+            _currentAbsorbMass = _absorbSetting.BaseAbsorbMass;
+            _levelOfRequirings = _absorbSetting.BaseLevelOfRequirings;
+
+            AbsorptionProgressChanged?.Invoke(_currentAbsorbMass);
         }
     }
 }

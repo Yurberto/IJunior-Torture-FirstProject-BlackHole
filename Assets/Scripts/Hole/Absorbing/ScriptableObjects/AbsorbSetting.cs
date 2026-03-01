@@ -7,7 +7,11 @@ namespace Assets.Scripts.Hole
     public class AbsorbSetting : ScriptableObject
     {
         [SerializeField] private float _upScaleMass = 10;
+        [SerializeField] private float _baseAbsorbMass = 0;
+        [SerializeField] private float _baseLevelOfRequirings = 1;
 
         public float UpScaleMass => _upScaleMass;
+        public float BaseAbsorbMass => _baseAbsorbMass;
+        public float BaseLevelOfRequirings => _baseLevelOfRequirings;
     }
 }

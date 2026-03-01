@@ -23,8 +23,10 @@ namespace Assets.Scripts.Game
         [Header("Hole")]
         [SerializeField] private HoleScaler _holeScaler;
         [SerializeField] private HoleMover _holeMover;
+        [Header("Absorber")]
         [SerializeField] private Absorber _absorber;
         [SerializeField] private AbsorbSetting _absorbSetting;
+        [SerializeField] private AbsorbBar _absorbBar;
 
         [Header("Wallet")]
         [SerializeField] private WalletView _walletView;
@@ -44,6 +46,7 @@ namespace Assets.Scripts.Game
         {
             _absorbHandler = new AbsorbHandler(_absorbSetting);
             _absorber.Init(_absorbHandler);
+            _absorbBar.Init(_absorbHandler);
 
             _startSize = new Ability(_startSizeBaseStats);
             _scale = new Ability(_scaleBaseStats);
@@ -67,6 +70,7 @@ namespace Assets.Scripts.Game
 
         private void OnDestroy()
         {
+            _absorbBar.Dispose();
             _abilityUpgraderView.Dispose();
             _holeScaler.Dispose();
         }

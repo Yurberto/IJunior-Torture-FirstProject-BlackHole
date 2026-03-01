@@ -12,7 +12,7 @@ namespace Assets.Scripts.Hole
 
         public void Init(AbsorbHandler absorbHandler)
         {
-            if (absorbHandler == null) 
+            if (absorbHandler == null)
                 throw new ArgumentNullException(nameof(absorbHandler));
 
             _absorbHandler = absorbHandler;
