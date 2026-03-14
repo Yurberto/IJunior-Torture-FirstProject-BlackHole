@@ -2,7 +2,7 @@
 using Assets.Scripts.Game;
 using UnityEngine;
 using UnityEngine.UI;
-using Assets.Scripts.AbilityNew;
+using Assets.Scripts.AbilitySystem;
 
 namespace Assets.Scripts.Test
 {

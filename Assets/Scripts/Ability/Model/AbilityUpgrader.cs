@@ -3,7 +3,7 @@ using Assets.Scripts.WalletSystem;
 using System;
 using UnityEngine;
 
-namespace Assets.Scripts.AbilityNew
+namespace Assets.Scripts.AbilitySystem
 {
     public class AbilityUpgrader
     {

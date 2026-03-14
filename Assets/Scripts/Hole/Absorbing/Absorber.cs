@@ -7,8 +7,9 @@ namespace Assets.Scripts.Hole
     public class Absorber : MonoBehaviour
     {
         [SerializeField] private LayersData _layersData;
+        [SerializeField] private AudioSource _audioSource;
 
-        AbsorbHandler _absorbHandler;
+        private AbsorbHandler _absorbHandler;
 
         public void Init(AbsorbHandler absorbHandler)
         {
@@ -17,6 +18,8 @@ namespace Assets.Scripts.Hole
 
             _absorbHandler = absorbHandler;
         }
+
+        public event Action FallingObjectAbsorbed;
 
         private void OnTriggerExit(Collider other)
         {
@@ -27,7 +30,8 @@ namespace Assets.Scripts.Hole
                 if (otherGameObject.layer == _layersData.FallingObject)
                 {
                     _absorbHandler.Handle(rigidbody.mass);
-                    Debug.Log("Absorber_OnTriggerExit");
+                    _audioSource.Play();
+                    FallingObjectAbsorbed?.Invoke();
                 }
 
                 otherGameObject.SetActive(false);

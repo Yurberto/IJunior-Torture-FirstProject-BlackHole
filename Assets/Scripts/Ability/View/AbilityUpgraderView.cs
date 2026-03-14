@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.AbilityNew
+namespace Assets.Scripts.AbilitySystem
 {
     public class AbilityUpgraderView : MonoBehaviour
     {

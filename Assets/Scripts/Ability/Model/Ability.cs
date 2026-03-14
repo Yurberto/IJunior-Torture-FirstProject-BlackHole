@@ -1,8 +1,8 @@
-using Assets.Scripts.AbilityNew.ScriptableObjects;
+using Assets.Scripts.AbilitySystem.ScriptableObjects;
 using System;
 using UnityEngine;
 
-namespace Assets.Scripts.AbilityNew
+namespace Assets.Scripts.AbilitySystem
 {
     public class Ability
     {

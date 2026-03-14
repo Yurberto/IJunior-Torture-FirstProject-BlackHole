@@ -2,14 +2,13 @@
 using TMPro;
 using UnityEngine;
 
-namespace Assets.Scripts.AbilityNew
+namespace Assets.Scripts.AbilitySystem
 {
     public class AbilityView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _name;
         [SerializeField] private TextMeshProUGUI _level;
         [SerializeField] private TextMeshProUGUI _cost;
-        [SerializeField] private TextMeshProUGUI _ratio;
 
         private Ability _ability;
 
@@ -34,7 +33,6 @@ namespace Assets.Scripts.AbilityNew
         {
             _level.text = _ability.Level.ToString();
             _cost.text = _ability.Cost.ToString();
-            _ratio.text = _ability.Ratio.ToString();
         }
     }
 }

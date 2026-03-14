@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts.AbilityNew.ScriptableObjects
+namespace Assets.Scripts.AbilitySystem.ScriptableObjects
 {
     [CreateAssetMenu(fileName = nameof(BaseAbilityStats), menuName = nameof(ScriptableObject) + "/" + nameof(BaseAbilityStats))]
     public class BaseAbilityStats : ScriptableObject

@@ -20,12 +20,21 @@ namespace Assets.Scripts.Hole
            _filled.fillAmount = 0;
 
             _absorbHandler = absorbHandler;
+        }
+
+        public void Subscribe()
+        {
+            if (_absorbHandler == null)
+                throw new ArgumentNullException(nameof(_absorbHandler));
 
             _absorbHandler.AbsorptionProgressChanged += OnAbsorptionProgressChanged;
         }
 
-        public void Dispose()
+        public void Unsubscribe()
         {
+            if (_absorbHandler == null)
+                throw new ArgumentNullException(nameof(_absorbHandler));
+
             _absorbHandler.AbsorptionProgressChanged -= OnAbsorptionProgressChanged;
         }
 
