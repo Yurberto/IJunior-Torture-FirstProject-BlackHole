@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Scripts.Game.LevelGamplay
+namespace Assets.Scripts.Game.LevelSystem
 { 
     public class Level : MonoBehaviour
     {

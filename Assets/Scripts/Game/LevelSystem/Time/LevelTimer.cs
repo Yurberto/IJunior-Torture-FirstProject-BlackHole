@@ -13,7 +13,7 @@ namespace Assets.Scripts.Game.Time
             _timerService = new TimerService();
         }
 
-        public event Action IsOver;
+        public event Action HasOver;
 
         public void StartTimer(int time)
         {
@@ -31,7 +31,7 @@ namespace Assets.Scripts.Game.Time
             _timerService.Stop();
             _timerService.Completed -= StopTicking;
 
-            IsOver?.Invoke();
+            HasOver?.Invoke();
         }
     }
 }

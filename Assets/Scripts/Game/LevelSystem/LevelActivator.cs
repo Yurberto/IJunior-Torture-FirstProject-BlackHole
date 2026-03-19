@@ -3,7 +3,7 @@ using Assets.Scripts.Hole;
 using Assets.Scripts.Hole.Scale;
 using System;
 
-namespace Assets.Scripts.Game.LevelGamplay
+namespace Assets.Scripts.Game.LevelSystem
 {
     public class LevelActivator
     {

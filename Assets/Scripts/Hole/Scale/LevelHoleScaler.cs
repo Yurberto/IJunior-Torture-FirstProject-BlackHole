@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.AbilitySystem;
-using System;
+﻿using System;
 
 namespace Assets.Scripts.Hole.Scale
 {

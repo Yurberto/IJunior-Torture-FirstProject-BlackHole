@@ -11,7 +11,7 @@ namespace Assets.Scripts.Hole
 
         private MoverService _moverService;
 
-        public void Init()
+        private void Start()
         {
             _moverService = new MoverService(_transfrom);
         }

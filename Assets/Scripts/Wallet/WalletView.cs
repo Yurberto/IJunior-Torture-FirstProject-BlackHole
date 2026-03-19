@@ -18,6 +18,7 @@ namespace Assets.Scripts.WalletSystem
             _wallet = wallet;
 
             _wallet.MoneyAmountChanged += UpdateText;
+            UpdateText(_wallet.MoneyAmount);
         }
 
         public void Dispose()

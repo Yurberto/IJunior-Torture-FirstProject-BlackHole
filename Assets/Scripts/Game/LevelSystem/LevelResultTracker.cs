@@ -1,52 +1,68 @@
-﻿using Assets.Scripts.Game.Time;
+﻿using Assets.Scripts.Game.LevelSystem;
+using Assets.Scripts.Game.Time;
 using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 
-namespace Assets.Scripts.Game.LevelGamplay
+namespace Assets.Scripts.Game.LevelSystem
 {
     public class LevelResultTracker
     {
         private LevelAbsorbCounter _absorbCounter;
-        private Level _currentLevel;
+        private LevelTimer _timer;
 
-        private LevelTimer _currentTimer;
+        private CancellationTokenSource _cancellationTokenSource;
 
-        public LevelResultTracker(LevelAbsorbCounter absorbCounter)
+        public LevelResultTracker(LevelAbsorbCounter levelAbsorbCounter, LevelTimer timer)
         {
-            if (absorbCounter == null)
-                throw new ArgumentNullException(nameof(absorbCounter));
+            if (levelAbsorbCounter == null) 
+                throw new ArgumentNullException(nameof(levelAbsorbCounter));
+            if (timer == null)
+                throw new ArgumentNullException(nameof(timer)); 
 
-            _absorbCounter = absorbCounter;
+            _absorbCounter = levelAbsorbCounter;
+            _timer = timer;
         }
 
-        public event Action<bool> ResultDetermined;
+        public event Action<bool> ResultTracked;
 
-        public void Start(LevelTimer levelTimer)
+        public void StartTracking(int time, int reachedAbsorptions)
         {
-            _currentTimer = levelTimer;
+            if (time <= 0)
+                throw new ArgumentOutOfRangeException(nameof(time));
+            if (reachedAbsorptions <= 0)
+                throw new ArgumentOutOfRangeException(nameof(reachedAbsorptions));
 
-            _absorbCounter.AbsorbtionAdded += OnAbsorptionAdded;
-            _currentTimer.IsOver += OnTimerIsOver;
+            _timer.StartTimer(time);
+            _timer.HasOver += OnLose;
+
+            TrackAbsorptions(reachedAbsorptions).Forget();
         }
 
-        private void OnAbsorptionAdded(int absorptionCount)
+        private async UniTaskVoid TrackAbsorptions(int reachedAbsorptions)
         {
-            bool isLevelComplete = _currentLevel.Config.ObjectsCount <= absorptionCount;
+            while (reachedAbsorptions > _absorbCounter.CurrentAbsorptions && _cancellationTokenSource.Token.IsCancellationRequested == false)
+            {
+                await UniTask.DelayFrame(1, PlayerLoopTiming.Update);
+            }
 
-            Stop(isLevelComplete);
+            ResultTracked?.Invoke(true);
+            CancelToken();
         }
 
-        private void OnTimerIsOver()
+        private void OnLose()
         {
-            _currentTimer.IsOver -= OnTimerIsOver;
+            ResultTracked?.Invoke(false);
+            _timer.HasOver -= OnLose;
 
-            Stop(false);
+            CancelToken();
         }
 
-        private void Stop(bool isLevelComplete)
+        private void CancelToken()
         {
-            _absorbCounter.AbsorbtionAdded -= OnAbsorptionAdded;
-
-            ResultDetermined?.Invoke(isLevelComplete);
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
+            _cancellationTokenSource = null;
         }
     }
 }

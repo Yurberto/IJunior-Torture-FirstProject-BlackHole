@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Hole;
 using System;
 
-namespace Assets.Scripts.Game.LevelGamplay
+namespace Assets.Scripts.Game.LevelSystem
 {
     public class LevelAbsorbCounter
     {
@@ -18,7 +18,7 @@ namespace Assets.Scripts.Game.LevelGamplay
             Reset();
         }
 
-        public event Action<int> AbsorbtionAdded;
+        public int CurrentAbsorptions => _currentAbsorptions;
 
         public void Subscribe()
         {
@@ -37,7 +37,7 @@ namespace Assets.Scripts.Game.LevelGamplay
 
         private void AddAbsorption()
         {
-            AbsorbtionAdded?.Invoke(++_currentAbsorptions);
+            ++_currentAbsorptions;
         }
     }
 }
