@@ -1,49 +1,62 @@
 ﻿using Assets.Scripts.AbilitySystem;
-using Assets.Scripts.Game.LevelSystem;
+using Assets.Scripts.AbilitySystem.ScriptableObjects;
+using Assets.Scripts.Game.LevelSystem.Time;
+using Assets.Scripts.Game.Time;
 using Assets.Scripts.Hole;
 using Assets.Scripts.Hole.Scale;
-using Assets.Scripts.WalletSystem;
 using UnityEngine;
 
 namespace Assets.Scripts.Game
 {
     public class Bootstrapper : MonoBehaviour
     {
-        //game
-        [SerializeField] private _Game _game;
+        [SerializeField] private CanvasSwitcher _canvasSwitcher;
 
-        //wallet
-        [SerializeField] private WalletView _walletView;
-        private Wallet _wallet;
+        [Header("Ability")]
+        [SerializeField] private BaseAbilityStats _startSizeBaseStats;
+        [SerializeField] private BaseAbilityStats _scaleBaseStats;
+        [SerializeField] private BaseAbilityStats _moneyBaseStats;
 
-        //level
-        private LevelActivator _levelActivator;
+        [Header("Hole")]
+        [SerializeField] private HoleScalerView _holeScalerView;
+
+        [Header("Absorbing")]
+        [SerializeField] private AbsorbSetting _absorbSetting;
+        [SerializeField] private Absorber _absorber;
+        [SerializeField] private AbsorbBar _absorbBar;
+
+        [Header("Timer")]
+        [SerializeField] private LevelTimerView _levelTimerView;
+
+        private GameHoleScaler _gameHoleScaler;
         private LevelHoleScaler _levelHoleScaler;
 
-        //hole
-        [SerializeField] private Absorber _absorber; 
-        [SerializeField] private AbsorbBar _absorbBar; 
-        [SerializeField] private HoleMover _holeMover;
-        [SerializeField] private bl_Joystick _joystick;
+        private AbsorbHandler _absorbHandler;
 
-        //abilities
         private Ability _startSize;
         private Ability _scale;
         private Ability _money;
 
+        private TimerService _timerService;
+
         private void Awake()
         {
-            Debug.Log("Awake_Bootstrapper");
+            _startSize = new Ability(_startSizeBaseStats);
+            _scale = new Ability(_scaleBaseStats);
+            _money = new Ability(_moneyBaseStats);
 
-            //game
-            _game.Activate();
+            _absorbHandler = new AbsorbHandler(_absorbSetting);
+            _absorber.Init(_absorbHandler);
+            _absorbBar.Init(_absorbHandler);
 
-            //wallet
-            _wallet = new Wallet(0);
-            _walletView.Init(_wallet);
+            _gameHoleScaler = new GameHoleScaler(_startSize);
+            _levelHoleScaler = new LevelHoleScaler(_absorbHandler);
+            _holeScalerView.Init(_gameHoleScaler, _levelHoleScaler);
 
-            //level
-            _levelActivator = new LevelActivator(_absorber, _absorbBar,  _holeMover, _joystick, _levelHoleScaler, _startSize, _scale);
+            _timerService = new TimerService();
+            _levelTimerView.Init(_timerService);
+
+            _canvasSwitcher.OpenMainMenu();
         }
     }
 }

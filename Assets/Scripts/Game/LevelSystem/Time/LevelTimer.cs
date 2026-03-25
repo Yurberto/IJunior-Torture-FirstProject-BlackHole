@@ -8,9 +8,12 @@ namespace Assets.Scripts.Game.Time
 
         private TimerService _timerService;
 
-        public void Init()
+        public LevelTimer(TimerService timerService)
         {
-            _timerService = new TimerService();
+            if (timerService == null)
+                throw new ArgumentNullException(nameof(timerService));
+
+            _timerService = timerService;
         }
 
         public event Action HasOver;

@@ -11,6 +11,7 @@ namespace Assets.Scripts.Game.Time
 
         private CancellationTokenSource _cancellationTokenSource;
 
+        public event Action<int> Started;
         public event Action Completed;
         public event Action<int> Tick;
 
@@ -20,6 +21,7 @@ namespace Assets.Scripts.Game.Time
         {
             _cancellationTokenSource = new CancellationTokenSource();
             StartAsync(time).Forget();
+            Started?.Invoke(time);
         }
 
         public void Stop()

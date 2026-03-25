@@ -4,8 +4,8 @@ namespace Assets.Scripts.Hole.Scale
 {
     public class LevelHoleScaler
     {
-        private float _currentSize;
-        private float _scaleRatio;
+        private float _currentStartSizeRatio;
+        private float _currentScaleRatio;
 
         private AbsorbHandler _absorbHandler;
 
@@ -26,8 +26,8 @@ namespace Assets.Scripts.Hole.Scale
             if (scaleRatio <= 0)
                 throw new ArgumentOutOfRangeException(nameof(scaleRatio));
 
-            _currentSize = currentSize;
-            _scaleRatio = scaleRatio;
+            _currentStartSizeRatio = currentSize;
+            _currentScaleRatio = scaleRatio;
 
             _absorbHandler.RequiredMassReached += OnRequiredMassReached;
         }
@@ -39,8 +39,8 @@ namespace Assets.Scripts.Hole.Scale
 
         private void OnRequiredMassReached()
         {
-            _currentSize *= _scaleRatio;
-            CurrentSizeUpdated?.Invoke(_currentSize);
+            _currentStartSizeRatio *= _currentScaleRatio;
+            CurrentSizeUpdated?.Invoke(_currentStartSizeRatio);
         }
     }
 }

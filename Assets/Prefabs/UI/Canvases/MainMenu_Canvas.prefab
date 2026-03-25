@@ -1278,6 +1278,7 @@ GameObject:
   - component: {fileID: 2782953938116914706}
   - component: {fileID: 7402489004348222192}
   - component: {fileID: 6585954222412131384}
+  - component: {fileID: 8059009571205146469}
   m_Layer: 5
   m_Name: MainMenu_Canvas
   m_TagString: Untagged
@@ -1374,6 +1375,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8059009571205146469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3364118943210775175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f6f9bb6659eccb48a09abdfc1042176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startLevelButton: {fileID: 9044062820727919686}
+  _openSettingsButton: {fileID: 5811546914090010225}
+  _openShopButton: {fileID: 8988101108680916540}
+  _canvasSwitcher: {fileID: 0}
 --- !u!1 &4059315213831917423
 GameObject:
   m_ObjectHideFlags: 0
@@ -7412,6 +7429,7 @@ GameObject:
   - component: {fileID: 2797674935090888789}
   - component: {fileID: 2609410489495367383}
   - component: {fileID: 9044062820727919686}
+  - component: {fileID: 3586911411534119788}
   m_Layer: 5
   m_Name: StartLevelArea
   m_TagString: Untagged
@@ -7486,10 +7504,40 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 3586911411534119788}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3586911411534119788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6707223536623934152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6765079846913201783
 GameObject:
   m_ObjectHideFlags: 0

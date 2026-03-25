@@ -6,7 +6,7 @@ namespace Assets.Scripts.Hole
 {
     public class AbsorbBar : MonoBehaviour
     {
-        [SerializeField] private Image _filled;
+        [SerializeField] private Slider _slider;
 
         private AbsorbHandler _absorbHandler;
 
@@ -15,9 +15,7 @@ namespace Assets.Scripts.Hole
             if (absorbHandler == null)
                 throw new ArgumentNullException(nameof(absorbHandler));
 
-            _filled.type = Image.Type.Filled;
-            _filled.fillMethod = Image.FillMethod.Horizontal;
-           _filled.fillAmount = 0;
+            _slider.value = 0;
 
             _absorbHandler = absorbHandler;
         }
@@ -40,7 +38,7 @@ namespace Assets.Scripts.Hole
 
         private void OnAbsorptionProgressChanged(float fillRatio)
         {
-            _filled.fillAmount = Mathf.Clamp01(fillRatio);
+            _slider.value = Mathf.Clamp01(fillRatio);
             Debug.Log($"AbsorbBar_OnAbsorptionProgressChanged({fillRatio})");
         }
     }

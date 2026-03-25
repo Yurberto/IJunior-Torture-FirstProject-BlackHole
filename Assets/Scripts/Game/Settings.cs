@@ -8,7 +8,8 @@ namespace Assets.Scripts.Game
 {
     public class Settings : MonoBehaviour
     {
-        [SerializeField] private Canvas _canvas;
+        [SerializeField] private CanvasSwitcher _canvasSwitcher;
+        [Space]
         [SerializeField] private Button _closeButton;
 
         [SerializeField] private Slider _masterVolume;
@@ -28,7 +29,7 @@ namespace Assets.Scripts.Game
         private void OnEnable()
         {
             Debug.Log("OnEnable_Settings");
-            _closeButton.onClick.AddListener(Close);
+            _closeButton.onClick.AddListener(LeaveToMenu);
 
             Subscribe();
         }
@@ -36,16 +37,17 @@ namespace Assets.Scripts.Game
         private void OnDisable()
         {
             Debug.Log("OnDisable_Settings");
-            _closeButton.onClick.RemoveListener(Close);
+            _closeButton.onClick.RemoveListener(LeaveToMenu);
 
             UnSubscribe();
         }
 
-        private void Close()
+        private void LeaveToMenu()
         {
             Debug.Log("Close_Settings");
 
-            _canvas.gameObject.SetActive(false);
+            _canvasSwitcher.CloseSetting();
+            _canvasSwitcher.OpenMainMenu();
         }
 
 

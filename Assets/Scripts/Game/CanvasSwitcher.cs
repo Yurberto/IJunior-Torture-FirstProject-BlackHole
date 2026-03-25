@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Game
 {
-    public class CanvasManager : MonoBehaviour
+    public class CanvasSwitcher : MonoBehaviour
     {
         [SerializeField] private Canvas _mainMenu;
         [SerializeField] private Canvas _setting;
