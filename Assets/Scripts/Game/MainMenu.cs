@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Game.LevelSystem;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,16 @@ namespace Assets.Scripts.Game
         [SerializeField] private Button _openShopButton;
         [Space]
         [SerializeField] private CanvasSwitcher _canvasSwitcher;
+
+        private LevelStarter _levelStarter;
+
+        public void Init(LevelStarter levelStarter)
+        {
+            if (levelStarter == null)
+                throw new ArgumentNullException(nameof(levelStarter));
+
+            _levelStarter = levelStarter;
+        }    
 
         private void OnEnable()
         {
@@ -29,6 +40,7 @@ namespace Assets.Scripts.Game
         private void StartLevel()
         {
             _canvasSwitcher.CloseMainMenu();
+            _levelStarter.Start();
         }
 
         private void OpenSettings()

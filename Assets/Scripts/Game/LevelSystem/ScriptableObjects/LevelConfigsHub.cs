@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 namespace Assets.Scripts.Game.LevelSystem.ScriptableObjects
 {
@@ -17,6 +18,11 @@ namespace Assets.Scripts.Game.LevelSystem.ScriptableObjects
                 throw new ArgumentOutOfRangeException(nameof(currentIndex));
 
             _currentIndex = currentIndex;
+        }
+
+        public void AdvanceLevel()
+        {
+            YG2.saves.SetCurrentLevel(++_currentIndex);
         }
 
         public LevelConfig GetCurrent()

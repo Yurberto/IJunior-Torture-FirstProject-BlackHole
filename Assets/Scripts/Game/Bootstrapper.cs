@@ -1,16 +1,21 @@
 ﻿using Assets.Scripts.AbilitySystem;
 using Assets.Scripts.AbilitySystem.ScriptableObjects;
+using Assets.Scripts.Game.LevelSystem;
+using Assets.Scripts.Game.LevelSystem.ScriptableObjects;
 using Assets.Scripts.Game.LevelSystem.Time;
 using Assets.Scripts.Game.Time;
 using Assets.Scripts.Hole;
 using Assets.Scripts.Hole.Scale;
 using UnityEngine;
+using YG;
 
 namespace Assets.Scripts.Game
 {
     public class Bootstrapper : MonoBehaviour
     {
+        [Header("Core")]
         [SerializeField] private CanvasSwitcher _canvasSwitcher;
+        [SerializeField] private MainMenu _mainMenu;
 
         [Header("Ability")]
         [SerializeField] private BaseAbilityStats _startSizeBaseStats;
@@ -19,11 +24,15 @@ namespace Assets.Scripts.Game
 
         [Header("Hole")]
         [SerializeField] private HoleScalerView _holeScalerView;
+        [SerializeField] private HoleMover _holeMover;
 
         [Header("Absorbing")]
         [SerializeField] private AbsorbSetting _absorbSetting;
         [SerializeField] private Absorber _absorber;
         [SerializeField] private AbsorbBar _absorbBar;
+
+        [Header("LevelSystem")]
+        [SerializeField] private LevelConfigsHub _levelConfigsHub;
 
         [Header("Timer")]
         [SerializeField] private LevelTimerView _levelTimerView;
@@ -38,6 +47,13 @@ namespace Assets.Scripts.Game
         private Ability _money;
 
         private TimerService _timerService;
+
+        private LevelSpawner _levelSpawner;
+
+        private LevelTimer _levelTimer;
+        private LevelStarter _levelStarter;
+        private LevelFinisher _levelFinisher;
+        private LevelResultTracker _levelResultTracker;
 
         private void Awake()
         {
@@ -56,7 +72,25 @@ namespace Assets.Scripts.Game
             _timerService = new TimerService();
             _levelTimerView.Init(_timerService);
 
+            if (YG2.saves.IsFirstLaunch)
+                YG2.saves.OnFirstLaunch();
+
+            _levelConfigsHub.Init(YG2.saves.CurrentLevel);
+            _levelSpawner = new LevelSpawner(_levelConfigsHub);
+
+            _levelTimer = new LevelTimer(_timerService);
+            _levelFinisher = new LevelFinisher();
+            _levelResultTracker = new LevelResultTracker(_absorber, _levelTimer);
+            _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _levelTimer, _levelResultTracker, _levelFinisher, _holeMover);
+            _mainMenu.Init(_levelStarter);
+
             _canvasSwitcher.OpenMainMenu();
+            _levelSpawner.SpawnCurrentLevel();
+        }
+
+        private void OnApplicationQuit()
+        {
+            YG2.SaveProgress();
         }
     }
 }
