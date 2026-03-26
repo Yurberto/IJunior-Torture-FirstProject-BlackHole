@@ -70,7 +70,7 @@ namespace Assets.Scripts.Game
             if (value > 1 || value < 0) 
                 throw new ArgumentOutOfRangeException(nameof(value));
 
-            _audioMixer.SetFloat(_audioGroupNames.Master, value.FloatToDecibel());
+            _audioMixer.SetFloat(_audioGroupNames.Master, value.ToDecibel());
         }
 
         private void UpdateMusicVolume(float value)
@@ -78,7 +78,7 @@ namespace Assets.Scripts.Game
             if (value > 1 || value < 0)
                 throw new ArgumentOutOfRangeException(nameof(value));
 
-            _audioMixer.SetFloat(_audioGroupNames.Music, value.FloatToDecibel());
+            _audioMixer.SetFloat(_audioGroupNames.Music, value.ToDecibel());
         }
 
         private void UpdateSFXVolume(float value)
@@ -86,7 +86,7 @@ namespace Assets.Scripts.Game
             if (value > 1 || value < 0)
                 throw new ArgumentOutOfRangeException(nameof(value));
 
-            _audioMixer.SetFloat(_audioGroupNames.SFX, value.FloatToDecibel());
+            _audioMixer.SetFloat(_audioGroupNames.SFX, value.ToDecibel());
         }
     }
 }

@@ -29,7 +29,6 @@ namespace Assets.Scripts.Game
         private void StartLevel()
         {
             _canvasSwitcher.CloseMainMenu();
-            _canvasSwitcher.OpenLevel();
         }
 
         private void OpenSettings()

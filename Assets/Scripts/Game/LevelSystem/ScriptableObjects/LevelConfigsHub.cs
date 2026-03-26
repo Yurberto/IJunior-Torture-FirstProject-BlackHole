@@ -19,12 +19,12 @@ namespace Assets.Scripts.Game.LevelSystem.ScriptableObjects
             _currentIndex = currentIndex;
         }
 
-        public Transform GetCurrentLevel()
+        public LevelConfig GetCurrent()
         {
             if (_currentIndex < 0 || _currentIndex >= _configs.Count)
                     throw new ArgumentOutOfRangeException(nameof(_currentIndex));
 
-            return _configs[_currentIndex].Level;
+            return _configs[_currentIndex];
         }
     }
 }
