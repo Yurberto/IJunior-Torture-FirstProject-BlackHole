@@ -8,6 +8,7 @@ namespace Assets.Scripts.Game
         [SerializeField] private Canvas _mainMenu;
         [SerializeField] private Canvas _setting;
         [SerializeField] private Canvas _level;
+        [SerializeField] private Canvas _leaderboard;
 
         public void OpenMainMenu()
         {
@@ -24,6 +25,11 @@ namespace Assets.Scripts.Game
             _level.gameObject.SetActive(true);
         }
 
+        public void OpenLeaderboard()
+        {
+            _leaderboard.gameObject.SetActive(true);
+        }
+
         public void CloseMainMenu()
         {
             _mainMenu.gameObject.SetActive(false);
@@ -37,6 +43,11 @@ namespace Assets.Scripts.Game
         public void CloseLevel()
         {
             _level.gameObject.SetActive(false);
+        }
+
+        public void CloseLeaderboard()
+        {
+            _leaderboard.gameObject.SetActive(false);
         }
     }
 }

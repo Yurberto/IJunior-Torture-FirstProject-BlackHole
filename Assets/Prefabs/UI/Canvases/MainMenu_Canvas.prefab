@@ -1778,6 +1778,7 @@ GameObject:
   - component: {fileID: 8446823983098438159}
   - component: {fileID: 3740967001563682477}
   - component: {fileID: 7763543060799027791}
+  - component: {fileID: 2798757171702829211}
   m_Layer: 5
   m_Name: Button_Leaderboard
   m_TagString: Untagged
@@ -1887,6 +1888,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2798757171702829211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4894249387083644992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 919d267dfd02f6641aa54bdd4ee2d9b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _openButton: {fileID: 7763543060799027791}
+  _closeButton: {fileID: 0}
+  _leaderBoard: {fileID: 0}
 --- !u!1 &4908567650264587681
 GameObject:
   m_ObjectHideFlags: 0
