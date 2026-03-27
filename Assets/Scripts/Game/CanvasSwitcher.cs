@@ -5,16 +5,20 @@ namespace Assets.Scripts.Game
 {
     public class CanvasSwitcher : MonoBehaviour
     {
+        [Header("Core")]
         [SerializeField] private Canvas _mainMenu;
         [SerializeField] private Canvas _setting;
         [SerializeField] private Canvas _level;
         [SerializeField] private Canvas _leaderboard;
+        [Header("Level")]
+        [SerializeField] private Canvas _levelFailed;
+        [SerializeField] private Canvas _levelCompleted;
 
         public void OpenMainMenu()
         {
             _mainMenu.gameObject.SetActive(true);
         }
-
+        
         public void OpenSettings()
         {
             _setting.gameObject.SetActive(true);
@@ -28,6 +32,15 @@ namespace Assets.Scripts.Game
         public void OpenLeaderboard()
         {
             _leaderboard.gameObject.SetActive(true);
+        }
+
+        public void OpenLevelFailed()
+        {
+            _levelFailed.gameObject.SetActive(true);
+        }
+        public void OpenLevelCompleted()
+        {
+            _levelCompleted.gameObject.SetActive(true);
         }
 
         public void CloseMainMenu()
@@ -48,6 +61,15 @@ namespace Assets.Scripts.Game
         public void CloseLeaderboard()
         {
             _leaderboard.gameObject.SetActive(false);
+        }
+
+        public void CloseLevelFailed()
+        {
+            _levelFailed.gameObject.SetActive(false);
+        }
+        public void CloseLevelCompleted()
+        {
+            _levelCompleted.gameObject.SetActive(false);
         }
     }
 }

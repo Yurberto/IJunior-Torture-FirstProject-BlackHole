@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Hub
   m_EditorClassIdentifier: 
   _configs:
+  - {fileID: 11400000, guid: 07d957414c5a18749b13630fb234b02b, type: 2}
   - {fileID: 11400000, guid: 2d7007f663a6aa04d9dedca0ccdbd7f5, type: 2}
+  - {fileID: 11400000, guid: 3fcb4d725f99f1e4dac60d17a5a52508, type: 2}

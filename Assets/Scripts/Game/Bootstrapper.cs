@@ -57,6 +57,8 @@ namespace Assets.Scripts.Game
 
         private void Awake()
         {
+            YG2.StickyAdActivity(true);
+
             _startSize = new Ability(_startSizeBaseStats);
             _scale = new Ability(_scaleBaseStats);
             _money = new Ability(_moneyBaseStats);
@@ -80,7 +82,7 @@ namespace Assets.Scripts.Game
             _levelSpawner = new LevelSpawner(_levelConfigsHub);
 
             _levelTimer = new LevelTimer(_timerService);
-            _levelFinisher = new LevelFinisher();
+            _levelFinisher = new LevelFinisher(_canvasSwitcher);
             _levelResultTracker = new LevelResultTracker(_absorber, _levelTimer);
             _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _levelTimer, _levelResultTracker, _levelFinisher, _holeMover, _absorbBar, _levelHoleScaler);
             _mainMenu.Init(_levelStarter);

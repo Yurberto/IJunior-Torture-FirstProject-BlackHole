@@ -10,6 +10,7 @@ namespace Assets.Scripts.Game
         [SerializeField] private Button _startLevelButton;
         [SerializeField] private Button _openSettingsButton;
         [SerializeField] private Button _openShopButton;
+        [SerializeField] private Button _openLeaderboardButton;
         [Space]
         [SerializeField] private CanvasSwitcher _canvasSwitcher;
 
@@ -28,6 +29,7 @@ namespace Assets.Scripts.Game
             _startLevelButton.onClick.AddListener(StartLevel);
             _openSettingsButton.onClick.AddListener(OpenSettings);
             _openShopButton.onClick.AddListener(OpenShop);
+            _openLeaderboardButton.onClick.AddListener(OpenLeaderboard);
         }
 
         private void OnDisable()
@@ -35,6 +37,7 @@ namespace Assets.Scripts.Game
             _startLevelButton.onClick.RemoveListener(StartLevel);
             _openSettingsButton.onClick.RemoveListener(OpenSettings);
             _openShopButton.onClick.RemoveListener(OpenShop);
+            _openLeaderboardButton.onClick.RemoveListener(OpenLeaderboard);
         }
 
         private void StartLevel()
@@ -47,6 +50,12 @@ namespace Assets.Scripts.Game
         {
             _canvasSwitcher.CloseMainMenu();
             _canvasSwitcher.OpenSettings();
+        }
+
+        private void OpenLeaderboard()
+        {
+            _canvasSwitcher.CloseMainMenu();
+            _canvasSwitcher.OpenLeaderboard();
         }
 
         private void OpenShop()

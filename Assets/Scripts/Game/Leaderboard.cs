@@ -12,12 +12,14 @@ namespace Assets.Scripts.Game
 
         private void OnEnable()
         {
-            _closeButton.onClick.AddListener(Close);
+            if (_closeButton != null)
+                _closeButton.onClick.AddListener(Close);
         }
 
         private void OnDisable()
         {
-            _closeButton.onClick.RemoveListener(Close);
+            if (_closeButton != null)
+                _closeButton.onClick.RemoveListener(Close);
         }
 
         private void Close()

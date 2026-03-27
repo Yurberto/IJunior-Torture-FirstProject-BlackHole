@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Game.Time;
 using Assets.Scripts.Hole;
 using System;
+using UnityEngine;
 
 namespace Assets.Scripts.Game.LevelSystem
 {
@@ -48,6 +49,7 @@ namespace Assets.Scripts.Game.LevelSystem
                 LevelCompleted?.Invoke();
                 StopTracking();
             }
+            Debug.Log($"CurrentAbsorptions - {_currentAbsorbtions}, Reached - {_reachedAbsorptions}");
         }
 
         private void OnTimerFinished()

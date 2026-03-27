@@ -1390,6 +1390,7 @@ MonoBehaviour:
   _startLevelButton: {fileID: 9044062820727919686}
   _openSettingsButton: {fileID: 5811546914090010225}
   _openShopButton: {fileID: 8988101108680916540}
+  _openLeaderboardButton: {fileID: 7763543060799027791}
   _canvasSwitcher: {fileID: 0}
 --- !u!1 &4059315213831917423
 GameObject:
@@ -1900,9 +1901,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919d267dfd02f6641aa54bdd4ee2d9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _openButton: {fileID: 7763543060799027791}
   _closeButton: {fileID: 0}
-  _leaderBoard: {fileID: 0}
+  _canvasSwitcher: {fileID: 0}
 --- !u!1 &4908567650264587681
 GameObject:
   m_ObjectHideFlags: 0
