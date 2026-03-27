@@ -25,7 +25,7 @@ namespace Assets.Scripts.Hole
             if (_absorbHandler == null)
                 throw new ArgumentNullException(nameof(_absorbHandler));
 
-            _absorbHandler.AbsorptionProgressChanged += OnAbsorptionProgressChanged;
+            _absorbHandler.AbsorptionProgressUpdated += OnAbsorptionProgressChanged;
         }
 
         public void Unsubscribe()
@@ -33,7 +33,7 @@ namespace Assets.Scripts.Hole
             if (_absorbHandler == null)
                 throw new ArgumentNullException(nameof(_absorbHandler));
 
-            _absorbHandler.AbsorptionProgressChanged -= OnAbsorptionProgressChanged;
+            _absorbHandler.AbsorptionProgressUpdated -= OnAbsorptionProgressChanged;
         }
 
         private void OnAbsorptionProgressChanged(float fillRatio)

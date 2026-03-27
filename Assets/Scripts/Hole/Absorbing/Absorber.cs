@@ -32,6 +32,8 @@ namespace Assets.Scripts.Hole
                     _absorbHandler.Handle(rigidbody.mass);
                     _audioSource.Play();
                     FallingObjectAbsorbed?.Invoke();
+
+                    Debug.Log("OnTrggerExit:FallingObjectAbsorbed_Absorber");
                 }
 
                 otherGameObject.SetActive(false);

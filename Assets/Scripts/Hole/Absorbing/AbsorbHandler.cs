@@ -1,4 +1,5 @@
 using System;
+using UnityEngine; // удалить
 
 namespace Assets.Scripts.Hole
 {
@@ -19,7 +20,7 @@ namespace Assets.Scripts.Hole
         }
 
         public event Action RequiredMassReached;
-        public event Action<float> AbsorptionProgressChanged;
+        public event Action<float> AbsorptionProgressUpdated;
 
         public void Handle(float mass)
         {
@@ -34,9 +35,12 @@ namespace Assets.Scripts.Hole
                 _currentAbsorbMass = 0;
                 RequiredMassReached?.Invoke();
                 _levelOfRequirings++;
+
+                Debug.Log("RequiredMassReached_AbsorbHandler");
             }
 
-            AbsorptionProgressChanged?.Invoke(_currentAbsorbMass / requiringMass);
+            AbsorptionProgressUpdated?.Invoke(_currentAbsorbMass / requiringMass);
+
         }
 
         public void Reset()
@@ -44,7 +48,7 @@ namespace Assets.Scripts.Hole
             _currentAbsorbMass = _absorbSetting.BaseAbsorbMass;
             _levelOfRequirings = _absorbSetting.BaseLevelOfRequirings;
 
-            AbsorptionProgressChanged?.Invoke(_currentAbsorbMass);
+            AbsorptionProgressUpdated?.Invoke(_currentAbsorbMass);
         }
     }
 }

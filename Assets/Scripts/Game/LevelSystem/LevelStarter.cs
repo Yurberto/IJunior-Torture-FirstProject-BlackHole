@@ -1,8 +1,8 @@
 ﻿using Assets.Scripts.Game.LevelSystem.ScriptableObjects;
 using Assets.Scripts.Game.Time;
 using Assets.Scripts.Hole;
+using Assets.Scripts.Hole.Scale;
 using System;
-using UnityEngine; // удалить
 
 namespace Assets.Scripts.Game.LevelSystem
 {
@@ -16,15 +16,19 @@ namespace Assets.Scripts.Game.LevelSystem
         private LevelFinisher _finisher;
 
         private HoleMover _holeMover;
+        private AbsorbBar _absorbBar;
+        private LevelHoleScaler _levelHoleScaler;
 
         public LevelStarter
             (
-            CanvasSwitcher canvasSwitcher, 
+            CanvasSwitcher canvasSwitcher,
             LevelConfigsHub levelConfigsHub,
             LevelTimer timer,
             LevelResultTracker resultTracker,
             LevelFinisher finisher,
-            HoleMover holeMover
+            HoleMover holeMover,
+            AbsorbBar absorbBar,
+            LevelHoleScaler levelHoleScaler
             )
         {
             if (canvasSwitcher == null)
@@ -39,6 +43,10 @@ namespace Assets.Scripts.Game.LevelSystem
                 throw new ArgumentNullException(nameof(finisher));
             if (holeMover == null)
                 throw new ArgumentNullException(nameof(holeMover));
+            if (absorbBar == null)
+                throw new ArgumentNullException(nameof(absorbBar));
+            if (levelHoleScaler == null)
+                throw new ArgumentNullException(nameof(levelHoleScaler));
 
             _canvasSwitcher = canvasSwitcher;
             _levelConfigsHub = levelConfigsHub;
@@ -46,6 +54,8 @@ namespace Assets.Scripts.Game.LevelSystem
             _resultTracker = resultTracker;
             _finisher = finisher;
             _holeMover = holeMover;
+            _absorbBar = absorbBar;
+            _levelHoleScaler = levelHoleScaler;
         }
 
         public void Start()
@@ -59,7 +69,10 @@ namespace Assets.Scripts.Game.LevelSystem
 
             _resultTracker.LevelFailed += OnLevelFailed;
             _resultTracker.LevelCompleted += OnLevelCompleted;
+
             _holeMover.StartMoving();
+            _absorbBar.Subscribe();
+            _levelHoleScaler.Start();
         }
 
         private void OnLevelCompleted()
@@ -77,6 +90,8 @@ namespace Assets.Scripts.Game.LevelSystem
         private void OnFinish()
         {
             _holeMover.StopMoving();
+            _absorbBar.Unsubscribe();
+            _levelHoleScaler.Stop();
 
             _resultTracker.LevelFailed -= OnLevelFailed;
             _resultTracker.LevelCompleted -= OnLevelCompleted;

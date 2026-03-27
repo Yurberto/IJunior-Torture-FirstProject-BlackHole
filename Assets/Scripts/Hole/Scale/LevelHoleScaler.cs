@@ -1,34 +1,36 @@
-﻿using System;
+﻿using Assets.Scripts.AbilitySystem;
+using System;
 
 namespace Assets.Scripts.Hole.Scale
 {
     public class LevelHoleScaler
     {
-        private float _currentStartSizeRatio;
-        private float _currentScaleRatio;
+        private Ability _startSize;
+        private Ability _scale;
 
         private AbsorbHandler _absorbHandler;
 
-        public LevelHoleScaler(AbsorbHandler absorbHandler)
+        private float _currentSize;
+
+        public LevelHoleScaler(Ability startSize, Ability scale, AbsorbHandler absorbHandler)
         {
+            if (startSize == null)
+                throw new ArgumentNullException(nameof(startSize));
+            if (scale == null)
+                throw new ArgumentNullException(nameof(scale));
             if (absorbHandler == null)
                 throw new ArgumentNullException(nameof(absorbHandler));
 
+            _startSize = startSize;
+            _scale = scale;
             _absorbHandler = absorbHandler;
         }
 
         public event Action<float> CurrentSizeUpdated;
 
-        public void Start(float currentSize, float scaleRatio)
+        public void Start()
         {
-            if (currentSize <= 0)
-                throw new ArgumentOutOfRangeException(nameof(currentSize));
-            if (scaleRatio <= 0)
-                throw new ArgumentOutOfRangeException(nameof(scaleRatio));
-
-            _currentStartSizeRatio = currentSize;
-            _currentScaleRatio = scaleRatio;
-
+            _currentSize = _startSize.Ratio;
             _absorbHandler.RequiredMassReached += OnRequiredMassReached;
         }
 
@@ -39,8 +41,8 @@ namespace Assets.Scripts.Hole.Scale
 
         private void OnRequiredMassReached()
         {
-            _currentStartSizeRatio *= _currentScaleRatio;
-            CurrentSizeUpdated?.Invoke(_currentStartSizeRatio);
+            _currentSize *= _scale.Ratio;
+            CurrentSizeUpdated?.Invoke(_currentSize);
         }
     }
 }

@@ -66,8 +66,9 @@ namespace Assets.Scripts.Game
             _absorbBar.Init(_absorbHandler);
 
             _gameHoleScaler = new GameHoleScaler(_startSize);
-            _levelHoleScaler = new LevelHoleScaler(_absorbHandler);
+            _levelHoleScaler = new LevelHoleScaler(_startSize, _scale, _absorbHandler);
             _holeScalerView.Init(_gameHoleScaler, _levelHoleScaler);
+            _holeScalerView.Subscribe();
 
             _timerService = new TimerService();
             _levelTimerView.Init(_timerService);
@@ -81,7 +82,7 @@ namespace Assets.Scripts.Game
             _levelTimer = new LevelTimer(_timerService);
             _levelFinisher = new LevelFinisher();
             _levelResultTracker = new LevelResultTracker(_absorber, _levelTimer);
-            _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _levelTimer, _levelResultTracker, _levelFinisher, _holeMover);
+            _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _levelTimer, _levelResultTracker, _levelFinisher, _holeMover, _absorbBar, _levelHoleScaler);
             _mainMenu.Init(_levelStarter);
 
             _canvasSwitcher.OpenMainMenu();
@@ -91,6 +92,7 @@ namespace Assets.Scripts.Game
         private void OnApplicationQuit()
         {
             YG2.SaveProgress();
+            _holeScalerView.UnSubscribe();
         }
     }
 }
