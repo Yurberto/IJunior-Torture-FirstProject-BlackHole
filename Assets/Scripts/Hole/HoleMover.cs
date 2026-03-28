@@ -46,13 +46,14 @@ namespace Assets.Scripts.Hole
         {
             while (_cancellationTokenSource.IsCancellationRequested == false)
             {
+                await UniTask.NextFrame(_cancellationTokenSource.Token);
+
                 float horizontal = _joystick.Horizontal;
                 float vertical = _joystick.Vertical;
 
                 if ((Mathf.Approximately(horizontal, 0) && Mathf.Approximately(vertical, 0)) == false)
                     _moverService.MoveOnSurface(new Vector3(_joystick.Horizontal, 0, _joystick.Vertical), _speed * Time.deltaTime);
 
-                await UniTask.NextFrame(_cancellationTokenSource.Token);
             }
         }
     }
