@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.AbilitySystem;
-using Assets.Scripts.Hole.Scale;
 using System;
 
 namespace Assets.Scripts.Hole.Scale
@@ -16,7 +15,8 @@ namespace Assets.Scripts.Hole.Scale
             _startSize = startSize;
         }
 
-        public event Action<float> StartSizeUpdated;
+        public event Action<float> SizeUpdated;
+        public float StartSizeRatio => _startSize.Ratio;
 
         public void Subscribe()
         {
@@ -30,7 +30,7 @@ namespace Assets.Scripts.Hole.Scale
 
         private void OnHoleSizeChanged()
         {
-            StartSizeUpdated?.Invoke(_startSize.Ratio);
+            SizeUpdated?.Invoke(_startSize.Ratio);
         }
     }
 }

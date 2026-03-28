@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40a261498180ede428b4d28d45f28d0a, type: 3}
-  m_Name: 2
+  m_Name: 3
   m_EditorClassIdentifier: 
-  _level: {fileID: 8940982996834900856, guid: e3992116f87911b4fb59faee3cdd7860, type: 3}
-  _time: 40
-  _reward: 12
+  _level: {fileID: 5065000126766736295, guid: e94b21555ee31e84fafc2c10b69f06d2, type: 3}
+  _time: 30
+  _reward: 14

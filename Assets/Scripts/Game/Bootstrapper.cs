@@ -79,7 +79,7 @@ namespace Assets.Scripts.Game
 
             _gameHoleScaler = new GameHoleScaler(_startSize);
             _levelHoleScaler = new LevelHoleScaler(_startSize, _scale, _absorbHandler);
-            _holeScalerView.Init(_gameHoleScaler, _levelHoleScaler);
+            _holeScalerView.Init(_gameHoleScaler, _levelHoleScaler, _mainMenu);
             _holeScalerView.Subscribe();
 
             _timerService = new TimerService();

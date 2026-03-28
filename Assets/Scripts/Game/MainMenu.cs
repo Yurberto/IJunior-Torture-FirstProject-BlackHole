@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Game.LevelSystem;
+using Assets.Scripts.Hole.Scale;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
