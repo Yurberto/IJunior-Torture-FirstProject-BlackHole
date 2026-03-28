@@ -9,7 +9,6 @@ namespace Assets.Scripts.Game
         [SerializeField] private Canvas _mainMenu;
         [SerializeField] private Canvas _setting;
         [SerializeField] private Canvas _level;
-        [SerializeField] private Canvas _leaderboard;
         [Header("Level")]
         [SerializeField] private Canvas _levelFailed;
         [SerializeField] private Canvas _levelCompleted;
@@ -27,11 +26,6 @@ namespace Assets.Scripts.Game
         public void OpenLevel()
         {
             _level.gameObject.SetActive(true);
-        }
-
-        public void OpenLeaderboard()
-        {
-            _leaderboard.gameObject.SetActive(true);
         }
 
         public void OpenLevelFailed()
@@ -56,11 +50,6 @@ namespace Assets.Scripts.Game
         public void CloseLevel()
         {
             _level.gameObject.SetActive(false);
-        }
-
-        public void CloseLeaderboard()
-        {
-            _leaderboard.gameObject.SetActive(false);
         }
 
         public void CloseLevelFailed()

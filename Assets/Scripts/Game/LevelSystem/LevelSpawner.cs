@@ -9,6 +9,8 @@ namespace Assets.Scripts.Game.LevelSystem
     {
         private LevelConfigsHub _levelConfigsHub;
 
+        private Transform _lastSpawned;
+
         public LevelSpawner(LevelConfigsHub levelConfigsHub)
         {
             if (levelConfigsHub == null)
@@ -19,10 +21,19 @@ namespace Assets.Scripts.Game.LevelSystem
 
         public Transform SpawnCurrentLevel()
         {
-            Transform spawned = Object.Instantiate(_levelConfigsHub.GetCurrent().Level);
-            spawned.position = new Vector3(0, 0, 0);
+            if (_lastSpawned != null)
+                DestroyLastSpawned();
 
-            return spawned;
+            _lastSpawned = Object.Instantiate(_levelConfigsHub.GetCurrent().Level);
+            _lastSpawned.position = new Vector3(0, 0, 0);
+
+            return _lastSpawned;
+        }
+
+        private void DestroyLastSpawned()
+        {
+            Object.Destroy(_lastSpawned.gameObject);
+            _lastSpawned = null;
         }
     }
 }

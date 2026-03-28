@@ -90,6 +90,7 @@ namespace Assets.Scripts.Game.LevelSystem
         private void OnFinish()
         {
             _holeMover.StopMoving();
+            _holeMover.BackToStartPosition();
             _absorbBar.Unsubscribe();
             _levelHoleScaler.Stop();
 

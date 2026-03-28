@@ -37,6 +37,11 @@ namespace Assets.Scripts.Hole
             _cancellationTokenSource = null;
         }
 
+        public void BackToStartPosition()
+        {
+            _transfrom.position = new Vector3(0f, 0f, 0f);
+        }
+
         private async UniTaskVoid MoveAsync()
         {
             while (_cancellationTokenSource.IsCancellationRequested == false)

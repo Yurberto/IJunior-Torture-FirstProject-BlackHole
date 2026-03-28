@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _backToMenu: {fileID: 6769173926327306366}
-  _watchRevardAd: {fileID: 8768103369448006477}
+  _watchRewardAd: {fileID: 8768103369448006477}
   _canvasSwitcher: {fileID: 0}
 --- !u!1 &4930257012572628438
 GameObject:

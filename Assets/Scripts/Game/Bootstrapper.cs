@@ -86,15 +86,23 @@ namespace Assets.Scripts.Game
             _levelResultTracker = new LevelResultTracker(_absorber, _levelTimer);
             _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _levelTimer, _levelResultTracker, _levelFinisher, _holeMover, _absorbBar, _levelHoleScaler);
             _mainMenu.Init(_levelStarter);
+            _mainMenu.Opened += OnMenuOpened;
 
             _canvasSwitcher.OpenMainMenu();
-            _levelSpawner.SpawnCurrentLevel();
         }
 
         private void OnApplicationQuit()
         {
             YG2.SaveProgress();
+
             _holeScalerView.UnSubscribe();
+
+            _mainMenu.Opened -= OnMenuOpened;
+        }
+
+        private void OnMenuOpened()
+        {
+            _levelSpawner.SpawnCurrentLevel();
         }
     }
 }
