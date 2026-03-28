@@ -1,5 +1,5 @@
 using System;
-using UnityEngine;
+using YG;
 
 namespace Assets.Scripts.WalletSystem
 {
@@ -24,9 +24,9 @@ namespace Assets.Scripts.WalletSystem
             if (amount <= 0) 
                 throw new ArgumentOutOfRangeException(nameof(amount));
 
-            Debug.Log($"Add_Money - {amount}"); // удалить unityEngine
-
             _moneyAmount += amount;
+
+            YG2.saves.SetMoneyCount(_moneyAmount);
             MoneyAmountChanged?.Invoke(_moneyAmount);
         }
 
@@ -38,8 +38,9 @@ namespace Assets.Scripts.WalletSystem
             if (_moneyAmount - amount < 0)
                 return false;
 
-            Debug.Log($"TryPay_Money"); // удалить unityEngine
             _moneyAmount -= amount;
+
+            YG2.saves.SetMoneyCount(_moneyAmount);
             MoneyAmountChanged?.Invoke(_moneyAmount);
 
             return true;

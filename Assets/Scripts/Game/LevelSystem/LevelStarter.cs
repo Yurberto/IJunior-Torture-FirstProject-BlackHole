@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Game.LevelSystem.ScriptableObjects;
-using Assets.Scripts.Game.Time;
+﻿using Assets.Scripts.Game.Time;
 using Assets.Scripts.Hole;
 using Assets.Scripts.Hole.Scale;
 using System;

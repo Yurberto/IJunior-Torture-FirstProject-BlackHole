@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Game.LevelSystem.Award;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;

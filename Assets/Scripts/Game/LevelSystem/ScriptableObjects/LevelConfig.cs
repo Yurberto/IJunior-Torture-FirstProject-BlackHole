@@ -7,9 +7,11 @@ namespace Assets.Scripts.Game.LevelSystem
     {
         [SerializeField] private Transform _level;
         [SerializeField] private int _time;
+        [SerializeField] private int _reward;
 
         public Transform Level => _level;
         public int ObjectsCount => _level.childCount;
         public int Time => _time;
+        public int Reward => _reward;
     }
 }

@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: 2
   m_EditorClassIdentifier: 
   _level: {fileID: 8940982996834900856, guid: e3992116f87911b4fb59faee3cdd7860, type: 3}
-  _time: 20
+  _time: 40
+  _reward: 15

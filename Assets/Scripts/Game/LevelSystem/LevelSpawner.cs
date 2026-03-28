@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Game.LevelSystem.ScriptableObjects;
-using System;
+﻿using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

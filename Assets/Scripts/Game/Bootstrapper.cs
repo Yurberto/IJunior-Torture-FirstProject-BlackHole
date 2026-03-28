@@ -1,11 +1,12 @@
 ﻿using Assets.Scripts.AbilitySystem;
 using Assets.Scripts.AbilitySystem.ScriptableObjects;
 using Assets.Scripts.Game.LevelSystem;
-using Assets.Scripts.Game.LevelSystem.ScriptableObjects;
+using Assets.Scripts.Game.LevelSystem.Award;
 using Assets.Scripts.Game.LevelSystem.Time;
 using Assets.Scripts.Game.Time;
 using Assets.Scripts.Hole;
 using Assets.Scripts.Hole.Scale;
+using Assets.Scripts.WalletSystem;
 using UnityEngine;
 using YG;
 
@@ -34,6 +35,12 @@ namespace Assets.Scripts.Game
         [Header("LevelSystem")]
         [SerializeField] private LevelConfigsHub _levelConfigsHub;
 
+        [SerializeField] private LevelRewardView _levelRewardView;
+        [SerializeField] private CurrentLevelView _currentLevelView;
+
+        [Header("Wallet")]
+        [SerializeField] private WalletView _walletView;
+
         [Header("Timer")]
         [SerializeField] private LevelTimerView _levelTimerView;
 
@@ -49,11 +56,14 @@ namespace Assets.Scripts.Game
         private TimerService _timerService;
 
         private LevelSpawner _levelSpawner;
+        private LevelAwarder _levelAwarder;
 
         private LevelTimer _levelTimer;
         private LevelStarter _levelStarter;
         private LevelFinisher _levelFinisher;
         private LevelResultTracker _levelResultTracker;
+
+        private Wallet _wallet;
 
         private void Awake()
         {
@@ -79,14 +89,22 @@ namespace Assets.Scripts.Game
                 YG2.saves.OnFirstLaunch();
 
             _levelConfigsHub.Init(YG2.saves.CurrentLevel);
+            _wallet = new Wallet(YG2.saves.MoneyCount);
+
             _levelSpawner = new LevelSpawner(_levelConfigsHub);
+            _levelAwarder = new LevelAwarder(_wallet, _money);
 
             _levelTimer = new LevelTimer(_timerService);
-            _levelFinisher = new LevelFinisher(_canvasSwitcher, _levelConfigsHub);
+            _levelFinisher = new LevelFinisher(_canvasSwitcher, _levelConfigsHub, _levelAwarder);
             _levelResultTracker = new LevelResultTracker(_absorber, _levelTimer);
+
             _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _levelTimer, _levelResultTracker, _levelFinisher, _holeMover, _absorbBar, _levelHoleScaler);
             _mainMenu.Init(_levelStarter);
             _mainMenu.Opened += OnMenuOpened;
+
+            _walletView.Init(_wallet);
+            _levelRewardView.Init(_levelAwarder);
+            _currentLevelView.Init(_levelConfigsHub);
 
             _canvasSwitcher.OpenMainMenu();
         }
@@ -96,6 +114,10 @@ namespace Assets.Scripts.Game
             YG2.SaveProgress();
 
             _holeScalerView.UnSubscribe();
+            _holeMover.StopMoving();
+
+            _levelRewardView.Dispose();
+            _currentLevelView.Dispose();
 
             _mainMenu.Opened -= OnMenuOpened;
         }

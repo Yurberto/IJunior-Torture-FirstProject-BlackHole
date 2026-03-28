@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
-namespace Assets.Scripts.Game.LevelSystem.ScriptableObjects
+namespace Assets.Scripts.Game.LevelSystem
 {
     [CreateAssetMenu(fileName = nameof(LevelConfigsHub), menuName = nameof(ScriptableObject) + "/" + nameof(LevelConfigsHub))]
     public class LevelConfigsHub : ScriptableObject
@@ -18,11 +18,17 @@ namespace Assets.Scripts.Game.LevelSystem.ScriptableObjects
                 throw new ArgumentOutOfRangeException(nameof(currentIndex));
 
             _currentIndex = currentIndex;
+            IndexUpdated?.Invoke();
         }
+
+        public event Action IndexUpdated;
+
+        public int CurrentLevelIndex => _currentIndex;
 
         public void SwitchToNextLevel()
         {
             YG2.saves.SetCurrentLevel(++_currentIndex);
+            IndexUpdated?.Invoke();
         }
 
         public LevelConfig GetCurrent()

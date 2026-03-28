@@ -42,6 +42,11 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         _stickImage.CrossFadeColor(_normalColor, 0.1f, true, true);
     }
 
+    private void OnDisable()
+    {
+        _stickRect.position = _centerRect.position;
+    }
+
     private void Update()
     {
         _deathArea = _centerRect.position;

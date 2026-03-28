@@ -728,8 +728,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 736119211824661043}
+  - component: {fileID: 725677752523294976}
   m_Layer: 5
-  m_Name: MoneyAdded
+  m_Name: LevelReward_View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -756,6 +757,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 701}
   m_SizeDelta: {x: 938, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &725677752523294976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8442710873552769274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6407a78b010a9d4dac87031566dccc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 6283666842866105658}
 --- !u!1001 &7500909859288622287
 PrefabInstance:
   m_ObjectHideFlags: 0
