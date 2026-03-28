@@ -7,7 +7,7 @@ namespace Assets.Scripts.Hole
     public class HoleMover : MonoBehaviour
     {
         [SerializeField] private Transform _transfrom;
-        [SerializeField] private bl_Joystick _joystick;
+        [SerializeField] private Joystick _joystick;
 
         [SerializeField] private float _speed;
 
