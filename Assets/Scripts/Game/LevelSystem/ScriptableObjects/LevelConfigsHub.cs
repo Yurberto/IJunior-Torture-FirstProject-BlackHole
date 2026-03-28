@@ -20,7 +20,7 @@ namespace Assets.Scripts.Game.LevelSystem.ScriptableObjects
             _currentIndex = currentIndex;
         }
 
-        public void AdvanceLevel()
+        public void SwitchToNextLevel()
         {
             YG2.saves.SetCurrentLevel(++_currentIndex);
         }

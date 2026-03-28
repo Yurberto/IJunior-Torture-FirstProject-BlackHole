@@ -82,7 +82,7 @@ namespace Assets.Scripts.Game
             _levelSpawner = new LevelSpawner(_levelConfigsHub);
 
             _levelTimer = new LevelTimer(_timerService);
-            _levelFinisher = new LevelFinisher(_canvasSwitcher);
+            _levelFinisher = new LevelFinisher(_canvasSwitcher, _levelConfigsHub);
             _levelResultTracker = new LevelResultTracker(_absorber, _levelTimer);
             _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _levelTimer, _levelResultTracker, _levelFinisher, _holeMover, _absorbBar, _levelHoleScaler);
             _mainMenu.Init(_levelStarter);
