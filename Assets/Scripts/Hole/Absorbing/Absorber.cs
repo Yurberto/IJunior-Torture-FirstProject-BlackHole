@@ -24,20 +24,13 @@ namespace Assets.Scripts.Hole
         {
             if (other.TryGetComponent(out Rigidbody rigidbody))
             {
-                GameObject otherGameObject = other.gameObject;
+                _absorbHandler.Handle(rigidbody.mass);
+                other.gameObject.SetActive(false);
 
-                if (otherGameObject.layer == _layersData.FallingObject)
-                {
-                    _absorbHandler.Handle(rigidbody.mass);
-                    FallingObjectAbsorbed?.Invoke();
-
-                    Debug.Log("OnTrggerExit:FallingObjectAbsorbed_Absorber");
-                }
-
-                otherGameObject.SetActive(false);
+                FallingObjectAbsorbed?.Invoke();
             }
             else
-                throw new ArgumentException("Not found \"Rigidbody\" on \"FallingObject\"");
+                throw new ArgumentException("Not found \"Rigidbody\" on \"Object\"");
         }
     }
 }

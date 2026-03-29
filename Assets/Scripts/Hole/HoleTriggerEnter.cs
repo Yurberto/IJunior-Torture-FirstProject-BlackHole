@@ -15,7 +15,7 @@ namespace Assets.Scripts.Hole
 
         private void OnTriggerStay(Collider other)
         {
-            other.attachedRigidbody.WakeUp();
+            other.attachedRigidbody?.WakeUp();
         }
 
         private void OnTriggerExit(Collider other)

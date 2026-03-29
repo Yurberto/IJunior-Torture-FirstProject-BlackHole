@@ -37,6 +37,8 @@ namespace Assets.Scripts.Test
         private Ability _startSize;
         private Ability _scale;
 
+        private AbsorptionCounter _absorptionCounter;
+
         private void Awake()
         {
             YG2.StickyAdActivity(true);
@@ -52,14 +54,20 @@ namespace Assets.Scripts.Test
             _levelHoleScaler = new LevelHoleScaler(_startSize, _scale, _absorbHandler);
             _holeScalerView.Init(_gameHoleScaler, _levelHoleScaler, _mainMenu);
             _holeScalerView.Subscribe();
-
             _holeMover.StartMoving();
+
+            _absorptionCounter = new();
+
+            _absorber.FallingObjectAbsorbed += _absorptionCounter.Add;
         }
 
         private void OnApplicationQuit()
         {
             _holeScalerView.UnSubscribe();
             _holeMover.StopMoving();
+
+            _absorber.FallingObjectAbsorbed -= _absorptionCounter.Add;
+
         }
     }
 }
