@@ -24,12 +24,24 @@ namespace Assets.Scripts.Game.LevelSystem.Time
 
         private void OnEnable()
         {
+            if(_timerService == null)
+            {
+                Debug.Log("TimerService is null");
+                return;
+            }
+
             _timerService.Started += OnStarted;
             _timerService.Tick += UpdateInfo;
         }
 
         private void OnDisable()
         {
+            if (_timerService == null)
+            {
+                Debug.Log("TimerService is null");
+                return;
+            }
+
             _timerService.Started += OnStarted;
             _timerService.Tick += UpdateInfo;
         }

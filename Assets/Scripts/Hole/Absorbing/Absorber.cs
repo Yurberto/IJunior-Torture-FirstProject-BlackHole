@@ -7,7 +7,6 @@ namespace Assets.Scripts.Hole
     public class Absorber : MonoBehaviour
     {
         [SerializeField] private LayersData _layersData;
-        [SerializeField] private AudioSource _audioSource;
 
         private AbsorbHandler _absorbHandler;
 
@@ -30,7 +29,6 @@ namespace Assets.Scripts.Hole
                 if (otherGameObject.layer == _layersData.FallingObject)
                 {
                     _absorbHandler.Handle(rigidbody.mass);
-                    _audioSource.Play();
                     FallingObjectAbsorbed?.Invoke();
 
                     Debug.Log("OnTrggerExit:FallingObjectAbsorbed_Absorber");
