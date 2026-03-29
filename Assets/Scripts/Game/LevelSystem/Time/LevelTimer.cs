@@ -18,7 +18,7 @@ namespace Assets.Scripts.Game.Time
 
         public event Action HasOver;
 
-        public void StartTimer(int time)
+        public void Start(int time)
         {
             if (_timerService == null)
                 throw new ArgumentNullException(nameof(_timerService));
@@ -26,13 +26,17 @@ namespace Assets.Scripts.Game.Time
                 throw new ArgumentOutOfRangeException(nameof(time));
 
             _timerService.Start(time);
-            _timerService.Completed += StopTicking;
+            _timerService.Finished += OnFinished;
         }
 
-        private void StopTicking()
+        public void Stop()
         {
             _timerService.Stop();
-            _timerService.Completed -= StopTicking;
+        }
+
+        private void OnFinished()
+        {
+            _timerService.Finished -= OnFinished;
 
             HasOver?.Invoke();
         }

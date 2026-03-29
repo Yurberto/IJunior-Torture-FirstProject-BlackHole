@@ -19,13 +19,13 @@ namespace Assets.Scripts.Test
         private void OnEnable()
         {
             _timerService.Tick += OnTick;
-            _timerService.Completed += OnCompleted;
+            _timerService.Finished += OnCompleted;
         }
 
         private void OnDisable()
         {
             _timerService.Tick -= OnTick;
-            _timerService.Completed -= OnCompleted;
+            _timerService.Finished -= OnCompleted;
         }
 
         private void OnTick(int currentTime)

@@ -63,7 +63,7 @@ namespace Assets.Scripts.Game.LevelSystem
 
             LevelConfig currentLevelConfig = _levelConfigsHub.GetCurrent();
 
-            _timer.StartTimer(currentLevelConfig.Time);
+            _timer.Start(currentLevelConfig.Time);
             _resultTracker.Track(currentLevelConfig.ObjectsCount);
 
             _resultTracker.LevelFailed += OnLevelFailed;
@@ -78,6 +78,8 @@ namespace Assets.Scripts.Game.LevelSystem
         {
             OnFinish();
             _finisher.OnLevelCompleted();
+
+            _timer.Stop();
         }
 
         private void OnLevelFailed()
