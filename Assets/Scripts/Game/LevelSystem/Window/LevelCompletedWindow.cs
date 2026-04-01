@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using YG;
 
-namespace Assets.Scripts.Game.LevelSystem.Window
+namespace Assets.Scripts.Game.LevelSystem
 {
     public class LevelCompletedWindow : MonoBehaviour
     {
@@ -12,6 +12,16 @@ namespace Assets.Scripts.Game.LevelSystem.Window
         [SerializeField] private Button _watchRewardAd;
 
         [SerializeField] private CanvasSwitcher _canvasSwitcher;
+
+        private LevelAdRewarder _adRewarder;
+
+        public void Init(LevelAdRewarder adRewarder)
+        {
+            if (adRewarder == null) 
+                throw new ArgumentNullException(nameof(adRewarder));
+
+            _adRewarder = adRewarder;
+        }
 
         private void OnEnable()
         {
@@ -39,7 +49,8 @@ namespace Assets.Scripts.Game.LevelSystem.Window
 
         private void OnCloseAdv()
         {
-
+            _adRewarder.Reward(RewardType.CoinsMultiply);
+            BackToMenu();
         }
     }
 }

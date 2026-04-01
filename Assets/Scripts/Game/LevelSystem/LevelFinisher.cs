@@ -35,7 +35,6 @@ namespace Assets.Scripts.Game.LevelSystem
             _canvasSwitcher.CloseLevel();
             _canvasSwitcher.OpenLevelCompleted();
 
-
             _levelAwarder.AwardLevelReward(_levelConfigsHub.GetCurrent());
             _levelConfigsHub.SwitchToNextLevel();
         }

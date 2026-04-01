@@ -1445,6 +1445,7 @@ MonoBehaviour:
   _levelConfigsHub: {fileID: 11400000, guid: 212d883755c2daa44b1d53c838d6557e, type: 2}
   _levelRewardView: {fileID: 1308722989}
   _currentLevelView: {fileID: 1463094419}
+  _levelCompletedWindow: {fileID: 1707197016}
   _walletView: {fileID: 1803387858}
   _levelTimerView: {fileID: 543361610}
 --- !u!4 &1351882765
@@ -1756,6 +1757,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4874224092379341174, guid: acf2965d3eea97d4a81ce71aac61a8a8, type: 3}
   m_PrefabInstance: {fileID: 1365062739}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1707197016 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8024909425730900387, guid: acf2965d3eea97d4a81ce71aac61a8a8, type: 3}
+  m_PrefabInstance: {fileID: 1365062739}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4732b5780b5886c43a0141fa0bae7639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1716820669
 PrefabInstance:
   m_ObjectHideFlags: 0

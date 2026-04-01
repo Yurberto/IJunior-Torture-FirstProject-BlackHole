@@ -37,6 +37,7 @@ namespace Assets.Scripts.Game
 
         [SerializeField] private LevelRewardView _levelRewardView;
         [SerializeField] private CurrentLevelView _currentLevelView;
+        [SerializeField] private LevelCompletedWindow _levelCompletedWindow;
 
         [Header("Wallet")]
         [SerializeField] private WalletView _walletView;
@@ -62,6 +63,7 @@ namespace Assets.Scripts.Game
         private LevelStarter _levelStarter;
         private LevelFinisher _levelFinisher;
         private LevelResultTracker _levelResultTracker;
+        private LevelAdRewarder _levelAdRewarder;
 
         private Wallet _wallet;
 
@@ -97,6 +99,7 @@ namespace Assets.Scripts.Game
             _levelTimer = new LevelTimer(_timerService);
             _levelFinisher = new LevelFinisher(_canvasSwitcher, _levelConfigsHub, _levelAwarder);
             _levelResultTracker = new LevelResultTracker(_absorber, _levelTimer);
+            _levelAdRewarder = new LevelAdRewarder(_money, _wallet, _levelConfigsHub);
 
             _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _levelTimer, _levelResultTracker, _levelFinisher, _holeMover, _absorbBar, _levelHoleScaler);
             _mainMenu.Init(_levelStarter);
@@ -105,6 +108,7 @@ namespace Assets.Scripts.Game
             _walletView.Init(_wallet);
             _levelRewardView.Init(_levelAwarder);
             _currentLevelView.Init(_levelConfigsHub);
+            _levelCompletedWindow.Init(_levelAdRewarder);
 
             _canvasSwitcher.OpenMainMenu();
         }
