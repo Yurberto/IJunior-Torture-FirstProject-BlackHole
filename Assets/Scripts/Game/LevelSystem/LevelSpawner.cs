@@ -29,7 +29,7 @@ namespace Assets.Scripts.Game.LevelSystem
             return _lastSpawned;
         }
 
-        private void DestroyLastSpawned()
+        public void DestroyLastSpawned()
         {
             Object.Destroy(_lastSpawned.gameObject);
             _lastSpawned = null;

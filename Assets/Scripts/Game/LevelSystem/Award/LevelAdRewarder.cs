@@ -47,7 +47,7 @@ namespace Assets.Scripts.Game.LevelSystem.Award
                     throw new Exception("Unknowing rewardType");
             }
 
-            _wallet.Add(reward);
+            _wallet.AddMoney(reward);
         }
 
     }

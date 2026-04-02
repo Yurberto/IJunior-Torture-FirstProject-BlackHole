@@ -17,13 +17,13 @@ namespace Assets.Scripts.WalletSystem
 
             _wallet = wallet;
 
-            _wallet.MoneyAmountChanged += UpdateText;
+            _wallet.MoneyAmountUpdated += UpdateText;
             UpdateText(_wallet.MoneyAmount);
         }
 
         public void Dispose()
         {
-            _wallet.MoneyAmountChanged -= UpdateText;
+            _wallet.MoneyAmountUpdated -= UpdateText;
         }
 
         private void UpdateText(int value)

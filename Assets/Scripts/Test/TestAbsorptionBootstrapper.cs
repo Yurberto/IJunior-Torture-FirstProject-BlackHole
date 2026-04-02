@@ -1,14 +1,7 @@
 ﻿using Assets.Scripts.AbilitySystem;
-using Assets.Scripts.AbilitySystem.ScriptableObjects;
 using Assets.Scripts.Game;
-using Assets.Scripts.Game.LevelSystem;
-using Assets.Scripts.Game.LevelSystem.Award;
-using Assets.Scripts.Game.LevelSystem.Time;
-using Assets.Scripts.Game.Time;
 using Assets.Scripts.Hole;
 using Assets.Scripts.Hole.Scale;
-using Assets.Scripts.WalletSystem;
-using System;
 using UnityEngine;
 using YG;
 
@@ -67,7 +60,6 @@ namespace Assets.Scripts.Test
             _holeMover.StopMoving();
 
             _absorber.FallingObjectAbsorbed -= _absorptionCounter.Add;
-
         }
     }
 }

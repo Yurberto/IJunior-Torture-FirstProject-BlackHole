@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.AbilitySystem;
-using Assets.Scripts.AbilitySystem.ScriptableObjects;
 using Assets.Scripts.Game.LevelSystem;
 using Assets.Scripts.Game.LevelSystem.Award;
 using Assets.Scripts.Game.LevelSystem.Time;
@@ -18,10 +17,20 @@ namespace Assets.Scripts.Game
         [SerializeField] private CanvasSwitcher _canvasSwitcher;
         [SerializeField] private MainMenu _mainMenu;
 
-        [Header("Ability")]
+        [Header("AbilityStats")]
         [SerializeField] private BaseAbilityStats _startSizeBaseStats;
         [SerializeField] private BaseAbilityStats _scaleBaseStats;
         [SerializeField] private BaseAbilityStats _moneyBaseStats;
+
+        [Header("AbilityUpgradeView")]
+        [SerializeField] private AbilityUpgraderView _startSizeUpgraderView;
+        [SerializeField] private AbilityUpgraderView _scaleUpgraderView;
+        [SerializeField] private AbilityUpgraderView _moneyUpgraderView;
+
+        [Header("AbilityView")]
+        [SerializeField] private AbilityView _startSizeView;
+        [SerializeField] private AbilityView _scaleView;
+        [SerializeField] private AbilityView _moneyView;
 
         [Header("Hole")]
         [SerializeField] private HoleScalerView _holeScalerView;
@@ -36,8 +45,9 @@ namespace Assets.Scripts.Game
         [SerializeField] private LevelConfigsHub _levelConfigsHub;
 
         [SerializeField] private LevelRewardView _levelRewardView;
-        [SerializeField] private CurrentLevelView _currentLevelView;
+        [SerializeField] private CurrentLevelNumberView _currentLevelView;
         [SerializeField] private LevelCompletedWindow _levelCompletedWindow;
+        [SerializeField] private LevelFailedWindow _levelFailedWindow;
 
         [Header("Wallet")]
         [SerializeField] private WalletView _walletView;
@@ -53,6 +63,14 @@ namespace Assets.Scripts.Game
         private Ability _startSize;
         private Ability _scale;
         private Ability _money;
+
+        private AbilityUpgrader _startSizeUpgrader;
+        private AbilityUpgrader _scaleUpgrader;
+        private AbilityUpgrader _moneyUpgrader;
+
+        private AbilityUpgradePresenter _startSizeUpgradePresenter;
+        private AbilityUpgradePresenter _scaleUpgradePresenter;
+        private AbilityUpgradePresenter _moneyUpgradePresenter;
 
         private TimerService _timerService;
 
@@ -71,9 +89,32 @@ namespace Assets.Scripts.Game
         {
             YG2.StickyAdActivity(true);
 
+            if (YG2.saves.IsFirstLaunch)
+                YG2.saves.OnFirstLaunch();
+
+            _levelConfigsHub.Init(YG2.saves.CurrentLevel);
+            //_wallet = new Wallet(YG2.saves.MoneyCount);
+            _wallet = new Wallet(10);
+
             _startSize = new Ability(_startSizeBaseStats);
             _scale = new Ability(_scaleBaseStats);
             _money = new Ability(_moneyBaseStats);
+
+            _startSizeView.Init(_startSize);
+            _scaleView.Init(_scale);
+            _moneyView.Init(_money);
+
+            _startSizeUpgrader = new AbilityUpgrader(_startSize, _wallet);
+            _scaleUpgrader = new AbilityUpgrader(_scale, _wallet);
+            _moneyUpgrader = new AbilityUpgrader(_money, _wallet);
+
+            _startSizeUpgradePresenter = new AbilityUpgradePresenter(_startSizeUpgrader, _startSizeUpgraderView);
+            _scaleUpgradePresenter = new AbilityUpgradePresenter(_scaleUpgrader, _scaleUpgraderView);
+            _moneyUpgradePresenter = new AbilityUpgradePresenter(_moneyUpgrader, _moneyUpgraderView);
+
+            _startSizeUpgraderView.Subscibe();
+            _scaleUpgraderView.Subscibe();
+            _moneyUpgraderView.Subscibe();
 
             _absorbHandler = new AbsorbHandler(_absorbSetting);
             _absorber.Init(_absorbHandler);
@@ -87,28 +128,22 @@ namespace Assets.Scripts.Game
             _timerService = new TimerService();
             _levelTimerView.Init(_timerService);
 
-            if (YG2.saves.IsFirstLaunch)
-                YG2.saves.OnFirstLaunch();
-
-            _levelConfigsHub.Init(YG2.saves.CurrentLevel);
-            _wallet = new Wallet(YG2.saves.MoneyCount);
-
             _levelSpawner = new LevelSpawner(_levelConfigsHub);
             _levelAwarder = new LevelAwarder(_wallet, _money);
 
             _levelTimer = new LevelTimer(_timerService);
-            _levelFinisher = new LevelFinisher(_canvasSwitcher, _levelConfigsHub, _levelAwarder);
+            _levelFinisher = new LevelFinisher(_canvasSwitcher, _levelSpawner, _levelConfigsHub, _levelAwarder);
             _levelResultTracker = new LevelResultTracker(_absorber, _levelTimer);
             _levelAdRewarder = new LevelAdRewarder(_money, _wallet, _levelConfigsHub);
 
-            _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _levelTimer, _levelResultTracker, _levelFinisher, _holeMover, _absorbBar, _levelHoleScaler);
+            _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _levelSpawner, _levelTimer, _levelResultTracker, _levelFinisher, _holeMover, _absorbBar, _levelHoleScaler);
             _mainMenu.Init(_levelStarter);
-            _mainMenu.Opened += OnMenuOpened;
 
             _walletView.Init(_wallet);
             _levelRewardView.Init(_levelAwarder);
             _currentLevelView.Init(_levelConfigsHub);
             _levelCompletedWindow.Init(_levelAdRewarder);
+            _levelFailedWindow.Init(_levelSpawner);
 
             _canvasSwitcher.OpenMainMenu();
         }
@@ -117,18 +152,28 @@ namespace Assets.Scripts.Game
         {
             YG2.SaveProgress();
 
+            _startSizeView.Dispose();
+            _scaleView.Dispose();
+            _moneyView.Dispose();
+
+            _startSizeUpgrader.Dispose();
+            _scaleUpgrader.Dispose();
+            _moneyUpgrader.Dispose();
+
+            _startSizeUpgradePresenter.Dispose();
+            _scaleUpgradePresenter.Dispose();
+            _moneyUpgradePresenter.Dispose();
+
+            _startSizeUpgraderView.UnSubscribe();
+            _scaleUpgraderView.UnSubscribe();
+            _moneyUpgraderView.UnSubscribe();
+
+            _gameHoleScaler.Dispose();
             _holeScalerView.UnSubscribe();
             _holeMover.StopMoving();
 
             _levelRewardView.Dispose();
             _currentLevelView.Dispose();
-
-            _mainMenu.Opened -= OnMenuOpened;
-        }
-
-        private void OnMenuOpened()
-        {
-            _levelSpawner.SpawnCurrentLevel();
         }
     }
 }

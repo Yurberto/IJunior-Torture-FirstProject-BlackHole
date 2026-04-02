@@ -1,4 +1,3 @@
-using Assets.Scripts.AbilitySystem.ScriptableObjects;
 using System;
 using UnityEngine;
 
@@ -38,11 +37,6 @@ namespace Assets.Scripts.AbilitySystem
         public void UpLevel()
         {
             _ratio *= _baseStats.UpLevelRatioGrowth;
-            Upgrade();
-        }
-
-        private void Upgrade()
-        {
             _level++;
             _cost = (int)(_baseStats.Cost * Mathf.Pow(_level, _baseStats.UpLevelCostGrowth));
 

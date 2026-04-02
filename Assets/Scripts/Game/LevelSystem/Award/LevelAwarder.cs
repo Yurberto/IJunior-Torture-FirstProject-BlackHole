@@ -25,7 +25,7 @@ namespace Assets.Scripts.Game.LevelSystem
 
         public void AwardLevelReward(LevelConfig levelConfig)
         {
-            _wallet.Add(Mathf.CeilToInt(levelConfig.Reward * _money.Ratio));
+            _wallet.AddMoney(Mathf.CeilToInt(levelConfig.Reward * _money.Ratio));
 
             LevelRewardAwarded?.Invoke(levelConfig.Reward);
         }

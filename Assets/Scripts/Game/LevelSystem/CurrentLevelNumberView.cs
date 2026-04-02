@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Game.LevelSystem
 {
-    public class CurrentLevelView : MonoBehaviour
+    public class CurrentLevelNumberView : MonoBehaviour
     {
         private const string Beginning = "Level";
 
@@ -18,22 +18,19 @@ namespace Assets.Scripts.Game.LevelSystem
                 throw new ArgumentNullException(nameof(levelConfigsHub));
 
             _levelConfigsHub = levelConfigsHub;
+            UpdateIndexView();
 
             _levelConfigsHub.IndexUpdated += UpdateIndexView;
-            UpdateIndexView();
         }
 
         public void Dispose()
         {
             _levelConfigsHub.IndexUpdated -= UpdateIndexView;
-
-            Debug.Log("OnDisable_CurrentLevelView");
         }
 
         private void UpdateIndexView()
         {
             _text.text = $"{Beginning} {_levelConfigsHub.CurrentLevelIndex + 1}";
-
         }
     }
 }

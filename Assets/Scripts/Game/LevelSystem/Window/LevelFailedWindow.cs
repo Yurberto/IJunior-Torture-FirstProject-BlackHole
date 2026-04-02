@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using YG;
 
-namespace Assets.Scripts.Game.LevelSystem.Window
+namespace Assets.Scripts.Game.LevelSystem
 {
     public class LevelFailedWindow : MonoBehaviour
     {
@@ -10,6 +11,16 @@ namespace Assets.Scripts.Game.LevelSystem.Window
         [SerializeField] private Button _watchRewardAd;
 
         [SerializeField] private CanvasSwitcher _canvasSwitcher;
+
+        private LevelSpawner _levelSpawner;
+
+        public void Init(LevelSpawner levelSpawner)
+        {
+            if (levelSpawner == null) 
+                throw new ArgumentNullException(nameof(levelSpawner));
+
+            _levelSpawner = levelSpawner;
+        }
 
         private void OnEnable()
         {
@@ -25,6 +36,8 @@ namespace Assets.Scripts.Game.LevelSystem.Window
 
         private void BackToMenu()
         {
+            _levelSpawner.DestroyLastSpawned();
+
             _canvasSwitcher.CloseLevelFailed();
             _canvasSwitcher.OpenMainMenu();
         }

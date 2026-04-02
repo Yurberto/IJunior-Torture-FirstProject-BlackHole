@@ -39,7 +39,6 @@ namespace Assets.Scripts.Hole
         private void OnAbsorptionProgressChanged(float fillRatio)
         {
             _slider.value = Mathf.Clamp01(fillRatio);
-            Debug.Log($"AbsorbBar_OnAbsorptionProgressChanged({fillRatio})");
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Assets.Scripts.AbilitySystem
     {
         [SerializeField] private TextMeshProUGUI _name;
         [SerializeField] private TextMeshProUGUI _level;
+        [SerializeField] private TextMeshProUGUI _ratio;
         [SerializeField] private TextMeshProUGUI _cost;
 
         private Ability _ability;
@@ -31,7 +32,8 @@ namespace Assets.Scripts.AbilitySystem
 
         private void UpdateInfo()
         {
-            _level.text = _ability.Level.ToString();
+            _level.text = $"Level - {_ability.Level.ToString()}";
+            _ratio.text = _ability.Ratio.ToString("F2");
             _cost.text = _ability.Cost.ToString();
         }
     }

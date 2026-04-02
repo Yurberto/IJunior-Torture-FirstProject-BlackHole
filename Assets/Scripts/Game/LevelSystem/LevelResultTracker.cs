@@ -49,7 +49,6 @@ namespace Assets.Scripts.Game.LevelSystem
                 LevelCompleted?.Invoke();
                 StopTracking();
             }
-            Debug.Log($"CurrentAbsorptions - {_currentAbsorbtions}, Reached - {_reachedAbsorptions}");
         }
 
         private void OnTimerFinished()

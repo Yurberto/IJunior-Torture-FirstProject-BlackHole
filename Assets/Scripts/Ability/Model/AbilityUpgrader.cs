@@ -1,73 +1,57 @@
-﻿using Assets.Scripts.Game.ScriptableObjects;
-using Assets.Scripts.WalletSystem;
+﻿using Assets.Scripts.WalletSystem;
 using System;
-using UnityEngine;
 
 namespace Assets.Scripts.AbilitySystem
 {
     public class AbilityUpgrader
     {
-        private Ability _startSize;
-        private Ability _scale;
-        private Ability _money;
-
+        private Ability _ability;
         private Wallet _wallet;
 
-        public AbilityUpgrader(Ability startSize, Ability scale, Ability money, Wallet wallet)
+        private bool _canUpgrade;
+
+        public AbilityUpgrader(Ability ability, Wallet wallet)
         {
-            if (startSize == null) 
-                throw new ArgumentNullException(nameof(startSize));
-            if (scale == null)
-                throw new ArgumentNullException(nameof(scale));
-            if (money == null)
-                throw new ArgumentNullException(nameof(money));
+            if (ability == null) 
+                throw new ArgumentNullException(nameof(ability));
             if (wallet == null)
                 throw new ArgumentNullException(nameof(wallet));
 
-            _startSize = startSize;
-            _scale = scale;
-            _money = money;
-
+            _ability = ability;
             _wallet = wallet;
+
+            _wallet.MoneyAmountUpdated += UpdateUpgradeAvailabilityInfo;
+            UpdateUpgradeAvailabilityInfo(_wallet.MoneyAmount);
         }
 
-        public bool TryUpgradeStartSize()
+        public void Dispose()
         {
-            Debug.Log($"UpgradeStartSize_AbilityUpgrader - {_startSize.Ratio}");
+            _wallet.MoneyAmountUpdated -= UpdateUpgradeAvailabilityInfo;
+        }
 
-            if (_wallet.TryPay(_startSize.Cost))
+        public event Action Upgraded;
+        public event Action<bool> UpgradeAvailabilityToggled;
+
+        public bool CanUpgrade => _canUpgrade;
+
+        public bool TryUpgrade()
+        {
+            if (_wallet.TryPay(_ability.Cost))
             {
-                _startSize.UpLevel();
+                _ability.UpLevel();
+                Upgraded?.Invoke();
+
                 return true;
             }
 
             return false;
         }
 
-        public bool TryUpgradeScale()
+        private void UpdateUpgradeAvailabilityInfo(int moneyAmount)
         {
-            Debug.Log($"UpgradeScale_AbilityUpgrader - {_scale.Ratio}");
+            _canUpgrade = _ability.Cost <= moneyAmount;
 
-            if (_wallet.TryPay(_scale.Cost))
-            {
-                _scale.UpLevel();
-                return true;
-            }
-
-            return false;
-        }
-
-        public bool TryUpgradeMoney()
-        {
-            Debug.Log($"UpgradeMoney_AbilityUpgrader - {_money.Ratio}");
-
-            if (_wallet.TryPay(_money.Cost))
-            {
-                _money.UpLevel();
-                return true;
-            }
-
-            return false;
+            UpgradeAvailabilityToggled?.Invoke(_canUpgrade);
         }
     }
 }

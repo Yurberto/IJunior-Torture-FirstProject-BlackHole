@@ -13,21 +13,21 @@ namespace Assets.Scripts.WalletSystem
                 throw new ArgumentOutOfRangeException(nameof(moneyAmount));
 
             _moneyAmount = moneyAmount;
+            Persist();
         }
 
-        public event Action<int> MoneyAmountChanged;
+        public event Action<int> MoneyAmountUpdated;
 
         public int MoneyAmount => _moneyAmount;
 
-        public void Add(int amount)
+        public void AddMoney(int amount)
         {
             if (amount <= 0) 
                 throw new ArgumentOutOfRangeException(nameof(amount));
 
             _moneyAmount += amount;
 
-            YG2.saves.SetMoneyCount(_moneyAmount);
-            MoneyAmountChanged?.Invoke(_moneyAmount);
+            Persist();
         }
 
         public bool TryPay(int amount)
@@ -39,11 +39,15 @@ namespace Assets.Scripts.WalletSystem
                 return false;
 
             _moneyAmount -= amount;
-
-            YG2.saves.SetMoneyCount(_moneyAmount);
-            MoneyAmountChanged?.Invoke(_moneyAmount);
+            Persist();
 
             return true;
+        }
+
+        private void Persist()
+        {
+            YG2.saves.SetMoneyCount(_moneyAmount);
+            MoneyAmountUpdated?.Invoke(_moneyAmount);
         }
     }
 }

@@ -13,23 +13,21 @@ namespace Assets.Scripts.Hole.Scale
                 throw new ArgumentNullException(nameof(startSize));
 
             _startSize = startSize;
+
+            _startSize.LevelUp += OnStartSizeChanged;
+        }
+
+        public void Dispose()
+        {
+            _startSize.LevelUp -= OnStartSizeChanged;
         }
 
         public event Action<float> SizeUpdated;
         public float StartSizeRatio => _startSize.Ratio;
 
-        public void Subscribe()
+        private void OnStartSizeChanged()
         {
-            _startSize.LevelUp += OnHoleSizeChanged;
-        }
-
-        public void UnSubscribe()
-        {
-            _startSize.LevelUp -= OnHoleSizeChanged;
-        }
-
-        private void OnHoleSizeChanged()
-        {
+            UnityEngine.Debug.Log("GameHoleScaler_OnStartSizeChanged");
             SizeUpdated?.Invoke(_startSize.Ratio);
         }
     }

@@ -10,6 +10,7 @@ namespace Assets.Scripts.Game.LevelSystem
         private CanvasSwitcher _canvasSwitcher;
         private LevelConfigsHub _levelConfigsHub;
 
+        private LevelSpawner _levelSpawner;
         private LevelTimer _timer;
         private LevelResultTracker _resultTracker;
         private LevelFinisher _finisher;
@@ -22,6 +23,7 @@ namespace Assets.Scripts.Game.LevelSystem
             (
             CanvasSwitcher canvasSwitcher,
             LevelConfigsHub levelConfigsHub,
+            LevelSpawner levelSpawner,
             LevelTimer timer,
             LevelResultTracker resultTracker,
             LevelFinisher finisher,
@@ -34,6 +36,8 @@ namespace Assets.Scripts.Game.LevelSystem
                 throw new ArgumentNullException(nameof(canvasSwitcher));
             if (levelConfigsHub == null)
                 throw new ArgumentException(nameof(levelConfigsHub));
+            if (levelSpawner == null)
+                throw new ArgumentException(nameof(levelSpawner));
             if (timer == null)
                 throw new ArgumentNullException(nameof(timer));
             if (resultTracker == null)
@@ -49,6 +53,7 @@ namespace Assets.Scripts.Game.LevelSystem
 
             _canvasSwitcher = canvasSwitcher;
             _levelConfigsHub = levelConfigsHub;
+            _levelSpawner = levelSpawner;
             _timer = timer;
             _resultTracker = resultTracker;
             _finisher = finisher;
@@ -59,6 +64,7 @@ namespace Assets.Scripts.Game.LevelSystem
 
         public void Start()
         {
+            _levelSpawner.SpawnCurrentLevel();
             _canvasSwitcher.OpenLevel();
 
             LevelConfig currentLevelConfig = _levelConfigsHub.GetCurrent();

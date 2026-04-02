@@ -6,53 +6,73 @@ namespace Assets.Scripts.AbilitySystem
 {
     public class AbilityUpgraderView : MonoBehaviour
     {
-        [SerializeField] private Button _startSize;
-        [SerializeField] private Button _scale;
-        [SerializeField] private Button _money;
+        [SerializeField] private Sprite _defaultIcon;
+        [SerializeField] private Sprite _upgradeAvailableIcon;
+        [Space]
+        [SerializeField] private Image _imageSource;
+        [SerializeField] private Button _upgradeButton;
+        [Space]
+        [SerializeField] private ParticleSystem _upgradeEffect;
+        [SerializeField] private AudioSource _upgradeSound;
 
         private AbilityUpgrader _abilityUpgrader;
 
         public void Init(AbilityUpgrader abilityUpgrader)
         {
-            if (abilityUpgrader == null) 
+            if (abilityUpgrader == null)
                 throw new ArgumentNullException(nameof(abilityUpgrader));
 
             _abilityUpgrader = abilityUpgrader;
+            _upgradeButton.interactable = false;
 
-            _startSize.onClick.AddListener(UpgradeStartSize);
-            _scale.onClick.AddListener(UpgradeScale);
-            _money.onClick.AddListener(UpgradeMoney);
+            UpdateUpgradeAvailabilityInfo(_abilityUpgrader.CanUpgrade);
         }
 
-        public void Dispose()
+        public event Action UpgradeButtonClicked;
+
+        public void Subscibe()
         {
-            _startSize.onClick.RemoveListener(UpgradeStartSize);
-            _scale.onClick.RemoveListener(UpgradeScale);
-            _money.onClick.RemoveListener(UpgradeMoney);
+            _abilityUpgrader.Upgraded += OnUpgraded;
+            _abilityUpgrader.UpgradeAvailabilityToggled += UpdateUpgradeAvailabilityInfo;
+
+            _upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
         }
 
-        private void UpgradeStartSize()
+        public void UnSubscribe()
         {
-            if (_abilityUpgrader.TryUpgradeStartSize() == false)
-            {
-                Debug.Log("Дописать логику отработчика ошибок");
-            }
+            _abilityUpgrader.Upgraded -= OnUpgraded;
+            _abilityUpgrader.UpgradeAvailabilityToggled -= UpdateUpgradeAvailabilityInfo;
+
+            _upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
         }
 
-        private void UpgradeScale()
+        private void OnUpgraded()
         {
-            if (_abilityUpgrader.TryUpgradeScale() == false)
-            {
-                Debug.Log("Дописать логику отработчика ошибок");
-            }
+            
+            Debug.Log("MakeEffectsGreatAgain");
+
+            StartCoroutine(PlayUpgradeAnimation());
         }
 
-        private void UpgradeMoney()
+        private void UpdateUpgradeAvailabilityInfo(bool canUpgrade)
         {
-            if (_abilityUpgrader.TryUpgradeMoney() == false)
-            {
-                Debug.Log("Дописать логику отработчика ошибок");
-            }
+            _upgradeButton.interactable = canUpgrade;
+            _imageSource.sprite = canUpgrade ? _upgradeAvailableIcon : _defaultIcon;
+        }
+
+        private void OnUpgradeButtonClicked()
+        {
+            UpgradeButtonClicked?.Invoke();
+        }
+
+        private System.Collections.IEnumerator PlayUpgradeAnimation()
+        {
+            Color originalColor = _imageSource.color;
+            _imageSource.color = Color.white;
+
+            yield return new WaitForSeconds(0.1f);
+
+            _imageSource.color = originalColor;
         }
     }
 }
