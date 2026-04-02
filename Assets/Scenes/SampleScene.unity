@@ -2213,15 +2213,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 233489730985718275, guid: 805ad6a656593bc41ae6b2b620b63b03, type: 3}
       propertyPath: _speed
-      value: 0.2
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: 233489730985718275, guid: 805ad6a656593bc41ae6b2b620b63b03, type: 3}
       propertyPath: _joystick
       value: 
       objectReference: {fileID: 2092496366}
     - target: {fileID: 233489730985718275, guid: 805ad6a656593bc41ae6b2b620b63b03, type: 3}
+      propertyPath: _maxSpeed
+      value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 233489730985718275, guid: 805ad6a656593bc41ae6b2b620b63b03, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 233489730985718275, guid: 805ad6a656593bc41ae6b2b620b63b03, type: 3}
+      propertyPath: _acceleration
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 233489730985718275, guid: 805ad6a656593bc41ae6b2b620b63b03, type: 3}
+      propertyPath: _deceleration
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 690716667511346569, guid: 805ad6a656593bc41ae6b2b620b63b03, type: 3}
       propertyPath: m_IsActive
@@ -2237,7 +2249,7 @@ PrefabInstance:
       objectReference: {fileID: 1146319956}
     - target: {fileID: 1642660222243955176, guid: 805ad6a656593bc41ae6b2b620b63b03, type: 3}
       propertyPath: m_VersionIndex
-      value: 5454
+      value: 5457
       objectReference: {fileID: 0}
     - target: {fileID: 2650107746621366903, guid: 805ad6a656593bc41ae6b2b620b63b03, type: 3}
       propertyPath: m_Mesh
@@ -2261,7 +2273,7 @@ PrefabInstance:
       objectReference: {fileID: 1855281062}
     - target: {fileID: 5937548900341479004, guid: 805ad6a656593bc41ae6b2b620b63b03, type: 3}
       propertyPath: m_VersionIndex
-      value: 3456
+      value: 3459
       objectReference: {fileID: 0}
     - target: {fileID: 8530695235518530260, guid: 805ad6a656593bc41ae6b2b620b63b03, type: 3}
       propertyPath: m_Name

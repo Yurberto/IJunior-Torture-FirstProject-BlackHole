@@ -18,7 +18,7 @@ namespace Assets.Scripts.Hole
         public void MoveOnSurface(Vector3 direction, float speed)
         {
             if (direction == Vector3.zero)
-                throw new ArgumentOutOfRangeException(nameof(direction));
+                return;
 
             direction.y = 0;
 

@@ -141,8 +141,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 22496700}
   - {fileID: 22449040}
+  - {fileID: 22496700}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -201,13 +201,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ratio: 23
-  _smoothTime: 0.3
   _onPressScale: 1.05
   _normalColor: {r: 0.3679244, g: 1, b: 0.92463535, a: 1}
   _pressColor: {r: 0.3226415, g: 0.8156863, b: 1, a: 1}
   _duration: 1
-  _stickRect: {fileID: 22449040}
-  _centerRect: {fileID: 22496700}
+  _stick: {fileID: 0}
+  _center: {fileID: 0}
   _canvas: {fileID: 0}
   _backImage: {fileID: 11417906}
   _stickImage: {fileID: 11401608}

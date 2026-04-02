@@ -9,9 +9,13 @@ namespace Assets.Scripts.Hole
         [SerializeField] private Transform _transfrom;
         [SerializeField] private Joystick _joystick;
 
-        [SerializeField] private float _speed;
+        [SerializeField, Min(0)] private float _maxSpeed = 0.17f;
+        [SerializeField, Min(0)] private float _acceleration = 6;
+        [SerializeField, Min(0)] private float _deceleration = 3;
 
         private MoverService _moverService;
+
+        private Vector3 _currentVelocity;
 
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -40,19 +44,28 @@ namespace Assets.Scripts.Hole
         public void BackToStartPosition()
         {
             _transfrom.position = new Vector3(0f, 0f, 0f);
+            _currentVelocity = Vector3.zero;
         }
 
         private async UniTaskVoid MoveAsync()
         {
-            while (_cancellationTokenSource.IsCancellationRequested == false)
+            while (_cancellationTokenSource != null &&
+                       !_cancellationTokenSource.IsCancellationRequested)
             {
                 await UniTask.NextFrame(_cancellationTokenSource.Token);
 
                 float horizontal = _joystick.Horizontal;
                 float vertical = _joystick.Vertical;
 
-                if ((Mathf.Approximately(horizontal, 0) && Mathf.Approximately(vertical, 0)) == false)
-                    _moverService.MoveOnSurface(new Vector3(_joystick.Horizontal, 0, _joystick.Vertical), _speed * Time.deltaTime);
+                Vector3 inputDirection = new Vector3(horizontal, 0, vertical);
+                bool hasInput = inputDirection.sqrMagnitude > 0.001f;
+
+                Vector3 targetVelocity = hasInput ? inputDirection.normalized * _maxSpeed : Vector3.zero;
+                float accelerationRate = hasInput ? _acceleration : _deceleration;
+
+                _currentVelocity = Vector3.Lerp(_currentVelocity, targetVelocity, accelerationRate * Time.deltaTime);
+
+                _moverService.MoveOnSurface(_currentVelocity, 1f);
             }
         }
     }
