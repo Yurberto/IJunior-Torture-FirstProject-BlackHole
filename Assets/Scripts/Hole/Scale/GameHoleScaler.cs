@@ -27,7 +27,6 @@ namespace Assets.Scripts.Hole.Scale
 
         private void OnStartSizeChanged()
         {
-            UnityEngine.Debug.Log("GameHoleScaler_OnStartSizeChanged");
             SizeUpdated?.Invoke(_startSize.Ratio);
         }
     }

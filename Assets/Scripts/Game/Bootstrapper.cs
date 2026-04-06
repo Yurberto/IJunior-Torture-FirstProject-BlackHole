@@ -17,6 +17,9 @@ namespace Assets.Scripts.Game
         [SerializeField] private CanvasSwitcher _canvasSwitcher;
         [SerializeField] private MainMenu _mainMenu;
 
+        [Header("Camera")]
+        [SerializeField] private TargetFollower _targetFollower;
+
         [Header("AbilityStats")]
         [SerializeField] private BaseAbilityStats _startSizeBaseStats;
         [SerializeField] private BaseAbilityStats _scaleBaseStats;
@@ -136,14 +139,18 @@ namespace Assets.Scripts.Game
             _levelResultTracker = new LevelResultTracker(_absorber, _levelTimer);
             _levelAdRewarder = new LevelAdRewarder(_money, _wallet, _levelConfigsHub);
 
-            _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _levelSpawner, _levelTimer, _levelResultTracker, _levelFinisher, _holeMover, _absorbBar, _levelHoleScaler);
+            _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _levelSpawner, _levelTimer, _levelResultTracker, _levelFinisher, _holeMover, _absorbHandler, _absorbBar, _levelHoleScaler);
             _mainMenu.Init(_levelStarter);
 
             _walletView.Init(_wallet);
             _levelRewardView.Init(_levelAwarder);
             _currentLevelView.Init(_levelConfigsHub);
+
             _levelCompletedWindow.Init(_levelAdRewarder);
             _levelFailedWindow.Init(_levelSpawner);
+
+            _targetFollower.Init(_holeScalerView);
+            _holeMover.Init(_holeScalerView);
 
             _canvasSwitcher.OpenMainMenu();
         }
@@ -174,6 +181,9 @@ namespace Assets.Scripts.Game
 
             _levelRewardView.Dispose();
             _currentLevelView.Dispose();
+
+            _targetFollower.Dispose();
+            _holeMover.Dispose();
         }
     }
 }

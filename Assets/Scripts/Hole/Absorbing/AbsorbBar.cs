@@ -25,7 +25,7 @@ namespace Assets.Scripts.Hole
             if (_absorbHandler == null)
                 throw new ArgumentNullException(nameof(_absorbHandler));
 
-            _absorbHandler.AbsorptionProgressUpdated += OnAbsorptionProgressChanged;
+            _absorbHandler.AbsorptionProgressUpdated += UpdateProgress;
         }
 
         public void Unsubscribe()
@@ -33,10 +33,10 @@ namespace Assets.Scripts.Hole
             if (_absorbHandler == null)
                 throw new ArgumentNullException(nameof(_absorbHandler));
 
-            _absorbHandler.AbsorptionProgressUpdated -= OnAbsorptionProgressChanged;
+            _absorbHandler.AbsorptionProgressUpdated -= UpdateProgress;
         }
 
-        private void OnAbsorptionProgressChanged(float fillRatio)
+        private void UpdateProgress(float fillRatio)
         {
             _slider.value = Mathf.Clamp01(fillRatio);
         }

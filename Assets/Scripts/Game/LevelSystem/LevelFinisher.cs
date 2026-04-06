@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Game.LevelSystem.Award;
+using Assets.Scripts.Hole;
 using System;
 
 namespace Assets.Scripts.Game.LevelSystem
@@ -7,12 +8,16 @@ namespace Assets.Scripts.Game.LevelSystem
     {
         private CanvasSwitcher _canvasSwitcher;
 
-        private LevelSpawner _levelSpawner;
-
         private LevelConfigsHub _levelConfigsHub;
         private LevelAwarder _levelAwarder;
 
-        public LevelFinisher(CanvasSwitcher canvasSwitcher, LevelSpawner levelSpawner, LevelConfigsHub levelConfigsHub, LevelAwarder levelAwarder)
+        public LevelFinisher
+            (
+            CanvasSwitcher canvasSwitcher,
+            LevelSpawner levelSpawner,
+            LevelConfigsHub levelConfigsHub,
+            LevelAwarder levelAwarder
+            )
         {
             if (canvasSwitcher == null)
                 throw new ArgumentNullException(nameof(canvasSwitcher));
@@ -24,7 +29,6 @@ namespace Assets.Scripts.Game.LevelSystem
                 throw new ArgumentNullException(nameof(levelAwarder));
 
             _canvasSwitcher = canvasSwitcher;
-            _levelSpawner = levelSpawner;
             _levelConfigsHub = levelConfigsHub;
             _levelAwarder = levelAwarder;
         }
@@ -37,8 +41,6 @@ namespace Assets.Scripts.Game.LevelSystem
 
         public void OnLevelCompleted()
         {
-            _levelSpawner.DestroyLastSpawned();
-
             _canvasSwitcher.CloseLevel();
             _canvasSwitcher.OpenLevelCompleted();
 

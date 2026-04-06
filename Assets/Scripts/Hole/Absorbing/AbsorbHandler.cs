@@ -1,5 +1,4 @@
 using System;
-using UnityEngine; // удалить
 
 namespace Assets.Scripts.Hole
 {
@@ -36,11 +35,10 @@ namespace Assets.Scripts.Hole
                 RequiredMassReached?.Invoke();
                 _levelOfRequirings++;
 
-                Debug.Log("RequiredMassReached_AbsorbHandler");
+                UnityEngine.Debug.Log("RequiredMassReached_AbsorbHandler");
             }
 
             AbsorptionProgressUpdated?.Invoke(_currentAbsorbMass / requiringMass);
-
         }
 
         public void Reset()

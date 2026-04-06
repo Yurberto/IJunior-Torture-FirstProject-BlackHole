@@ -33,7 +33,6 @@ namespace Assets.Scripts.WalletSystem
             if (value < 0)
                 throw new ArgumentOutOfRangeException(nameof(value));
 
-            Debug.Log($"UpdateText_MoneyView - " + value.ToString());
             _text.text = value.ToString();
         }
     }

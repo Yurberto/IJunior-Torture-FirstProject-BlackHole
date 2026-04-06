@@ -12,7 +12,7 @@ namespace Assets.Scripts.AbilitySystem
 
         public AbilityUpgrader(Ability ability, Wallet wallet)
         {
-            if (ability == null) 
+            if (ability == null)
                 throw new ArgumentNullException(nameof(ability));
             if (wallet == null)
                 throw new ArgumentNullException(nameof(wallet));
@@ -21,6 +21,7 @@ namespace Assets.Scripts.AbilitySystem
             _wallet = wallet;
 
             _wallet.MoneyAmountUpdated += UpdateUpgradeAvailabilityInfo;
+
             UpdateUpgradeAvailabilityInfo(_wallet.MoneyAmount);
         }
 
@@ -36,11 +37,17 @@ namespace Assets.Scripts.AbilitySystem
 
         public bool TryUpgrade()
         {
+            if (_canUpgrade == false)
+                return false;
+
             if (_wallet.TryPay(_ability.Cost))
             {
                 _ability.UpLevel();
-                Upgraded?.Invoke();
+                UpdateUpgradeAvailabilityInfo(_wallet.MoneyAmount);
 
+                UnityEngine.Debug.Log($"AbilityUpgrader_Upgrade, cost - {_ability.Cost}");
+
+                Upgraded?.Invoke();
                 return true;
             }
 
@@ -50,6 +57,8 @@ namespace Assets.Scripts.AbilitySystem
         private void UpdateUpgradeAvailabilityInfo(int moneyAmount)
         {
             _canUpgrade = _ability.Cost <= moneyAmount;
+
+            UnityEngine.Debug.Log($"AbilityUpgrader_UpdateUpgradeAvailabilityInfo - {_canUpgrade}");
 
             UpgradeAvailabilityToggled?.Invoke(_canUpgrade);
         }

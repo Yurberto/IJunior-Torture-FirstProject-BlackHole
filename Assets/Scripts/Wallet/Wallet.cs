@@ -26,7 +26,6 @@ namespace Assets.Scripts.WalletSystem
                 throw new ArgumentOutOfRangeException(nameof(amount));
 
             _moneyAmount += amount;
-
             Persist();
         }
 

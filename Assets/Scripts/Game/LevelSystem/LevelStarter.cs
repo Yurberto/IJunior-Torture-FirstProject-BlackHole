@@ -17,6 +17,7 @@ namespace Assets.Scripts.Game.LevelSystem
 
         private HoleMover _holeMover;
         private AbsorbBar _absorbBar;
+        private AbsorbHandler _absorbHandler;
         private LevelHoleScaler _levelHoleScaler;
 
         public LevelStarter
@@ -28,6 +29,7 @@ namespace Assets.Scripts.Game.LevelSystem
             LevelResultTracker resultTracker,
             LevelFinisher finisher,
             HoleMover holeMover,
+            AbsorbHandler absorbHandler,
             AbsorbBar absorbBar,
             LevelHoleScaler levelHoleScaler
             )
@@ -46,6 +48,8 @@ namespace Assets.Scripts.Game.LevelSystem
                 throw new ArgumentNullException(nameof(finisher));
             if (holeMover == null)
                 throw new ArgumentNullException(nameof(holeMover));
+            if (absorbHandler == null)
+                throw new ArgumentNullException(nameof(absorbHandler));
             if (absorbBar == null)
                 throw new ArgumentNullException(nameof(absorbBar));
             if (levelHoleScaler == null)
@@ -58,6 +62,7 @@ namespace Assets.Scripts.Game.LevelSystem
             _resultTracker = resultTracker;
             _finisher = finisher;
             _holeMover = holeMover;
+            _absorbHandler = absorbHandler;
             _absorbBar = absorbBar;
             _levelHoleScaler = levelHoleScaler;
         }
@@ -77,6 +82,7 @@ namespace Assets.Scripts.Game.LevelSystem
 
             _holeMover.StartMoving();
             _absorbBar.Subscribe();
+            _absorbHandler.Reset();
             _levelHoleScaler.Start();
         }
 

@@ -7,7 +7,7 @@ namespace Assets.Scripts.Hole.Scale
 {
     public class HoleScalerView : MonoBehaviour
     {
-        private const float EnterTriggerScaleFactor = 0.25f;
+        private const float TriggerEnterScaleFactor = 0.25f;
 
         [SerializeField] private SphereCollider _enterTrigger;
         [SerializeField] private BoxCollider _absorbTrigger;
@@ -33,6 +33,8 @@ namespace Assets.Scripts.Hole.Scale
             _mainMenu = mainMenu;
         }
 
+        public event Action<float> SizeUpdated;
+
         public void Subscribe()
         {
             _gameHoleScaler.SizeUpdated += UpdateSize;
@@ -54,11 +56,13 @@ namespace Assets.Scripts.Hole.Scale
             if (newSize <= 0)
                 throw new ArgumentOutOfRangeException(nameof(newSize));
 
-            _enterTrigger.radius = newSize * EnterTriggerScaleFactor;
+            _enterTrigger.radius = newSize * TriggerEnterScaleFactor;
             _absorbTrigger.size = new Vector3(newSize, _absorbTrigger.size.y, newSize);
 
             _edging.localScale = new Vector3(newSize, _edging.localScale.y, newSize);
             _cylinder.localScale = new Vector3(newSize, _cylinder.localScale.y, newSize);
+            
+            SizeUpdated?.Invoke(newSize);
         }
 
         private void ResetToStartSize()
