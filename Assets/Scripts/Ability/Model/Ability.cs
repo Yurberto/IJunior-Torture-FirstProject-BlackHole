@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using YG;
 
 namespace Assets.Scripts.AbilitySystem
 {
@@ -12,18 +13,34 @@ namespace Assets.Scripts.AbilitySystem
         private float _ratio;
 
         private BaseAbilityStats _baseStats;
+        private AbilityInfo _abilityInfo;
 
-        public Ability(BaseAbilityStats baseAbilityStats)
+        public Ability(BaseAbilityStats baseAbilityStats, AbilityInfo abilityInfo, bool isFirstLaunch)
         {
-            if (baseAbilityStats == null) 
+            if (baseAbilityStats == null)
                 throw new ArgumentNullException(nameof(baseAbilityStats));
+            if (abilityInfo == null)
+                throw new ArgumentNullException(nameof(abilityInfo));
 
             _baseStats = baseAbilityStats;
+            _abilityInfo = abilityInfo;
 
             _name = _baseStats.Name;
-            _level = _baseStats.Level;
-            _cost = _baseStats.Cost;
-            _ratio = _baseStats.Ratio;
+
+            if (isFirstLaunch)
+            {
+                _level = _baseStats.Level;
+                _cost = _baseStats.Cost;
+                _ratio = _baseStats.Ratio;
+
+                _abilityInfo.Update(_level, _cost, _ratio);
+            }
+            else
+            {
+                _level = _abilityInfo.Level;
+                _cost = _abilityInfo.Cost;
+                _ratio = _abilityInfo.Ratio;
+            }
         }
 
         public event Action LevelUp;
@@ -40,7 +57,15 @@ namespace Assets.Scripts.AbilitySystem
             _level++;
             _cost = (int)(_baseStats.Cost * Mathf.Pow(_level, _baseStats.UpLevelCostGrowth));
 
+            _abilityInfo.Update(_level, _cost, _ratio);
             LevelUp?.Invoke();
+        }
+
+        public void Reset()
+        {
+            _level = _baseStats.Level;
+            _cost = _baseStats.Cost;
+            _ratio = _baseStats.Ratio;
         }
     }
 }

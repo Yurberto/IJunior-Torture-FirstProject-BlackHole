@@ -92,16 +92,18 @@ namespace Assets.Scripts.Game
         {
             YG2.StickyAdActivity(true);
 
-            if (YG2.saves.IsFirstLaunch)
+            bool isFirstLaunch = YG2.saves.IsFirstLaunch;
+
+            if (isFirstLaunch)
                 YG2.saves.OnFirstLaunch();
 
             _levelConfigsHub.Init(YG2.saves.CurrentLevel);
-            //_wallet = new Wallet(YG2.saves.MoneyCount);
-            _wallet = new Wallet(10);
+            _wallet = new Wallet(YG2.saves.MoneyCount);
+            //_wallet = new Wallet(10);
 
-            _startSize = new Ability(_startSizeBaseStats);
-            _scale = new Ability(_scaleBaseStats);
-            _money = new Ability(_moneyBaseStats);
+            _startSize = new Ability(_startSizeBaseStats, YG2.saves.StartSizeInfo, isFirstLaunch);
+            _scale = new Ability(_scaleBaseStats, YG2.saves.ScaleInfo, isFirstLaunch);
+            _money = new Ability(_moneyBaseStats, YG2.saves.MoneyInfo, isFirstLaunch);
 
             _startSizeView.Init(_startSize);
             _scaleView.Init(_scale);

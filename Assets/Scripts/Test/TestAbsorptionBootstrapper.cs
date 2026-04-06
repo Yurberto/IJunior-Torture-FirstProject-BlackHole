@@ -36,8 +36,8 @@ namespace Assets.Scripts.Test
         {
             YG2.StickyAdActivity(true);
 
-            _startSize = new Ability(_startSizeBaseStats);
-            _scale = new Ability(_scaleBaseStats);
+            _startSize = new Ability(_startSizeBaseStats, YG2.saves.StartSizeInfo, true);
+            _scale = new Ability(_scaleBaseStats, YG2.saves.ScaleInfo, true);
 
             _absorbHandler = new AbsorbHandler(_absorbSetting);
             _absorber.Init(_absorbHandler);

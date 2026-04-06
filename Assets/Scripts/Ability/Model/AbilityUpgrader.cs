@@ -37,9 +37,6 @@ namespace Assets.Scripts.AbilitySystem
 
         public bool TryUpgrade()
         {
-            if (_canUpgrade == false)
-                return false;
-
             if (_wallet.TryPay(_ability.Cost))
             {
                 _ability.UpLevel();
