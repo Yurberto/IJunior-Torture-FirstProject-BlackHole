@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Game.LevelSystem;
-using Assets.Scripts.Hole;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,13 +14,17 @@ namespace Assets.Scripts.Game
         [SerializeField] private CanvasSwitcher _canvasSwitcher;
 
         private LevelStarter _levelStarter;
+        private LevelSpawner _levelSpawner;
 
-        public void Init(LevelStarter levelStarter)
+        public void Init(LevelStarter levelStarter, LevelSpawner levelSpawner)
         {
             if (levelStarter == null)
                 throw new ArgumentNullException(nameof(levelStarter));
+            if (levelSpawner == null)
+                throw new ArgumentException(nameof(levelSpawner));
 
             _levelStarter = levelStarter;
+            _levelSpawner = levelSpawner;
         }
 
         public event Action Opened;
@@ -48,7 +51,8 @@ namespace Assets.Scripts.Game
         private void StartLevel()
         {
             _canvasSwitcher.CloseMainMenu();
-            _levelStarter.Start();
+            _levelStarter.StartLevel();
+            _levelSpawner.SpawnCurrentLevel();
         }
 
         private void OpenSettings()

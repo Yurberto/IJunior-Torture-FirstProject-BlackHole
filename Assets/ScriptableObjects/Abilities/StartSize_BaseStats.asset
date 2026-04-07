@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: StartSize_BaseStats
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Size
-  <Cost>k__BackingField: 1
+  <Cost>k__BackingField: 5
   <Level>k__BackingField: 1
-  <Ratio>k__BackingField: 1
-  <UpLevelRatioGrowth>k__BackingField: 1.1
+  <Ratio>k__BackingField: 0.75
+  <UpLevelRatioGrowth>k__BackingField: 1.05
   <UpLevelCostGrowth>k__BackingField: 1.2

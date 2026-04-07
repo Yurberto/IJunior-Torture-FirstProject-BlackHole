@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: 6
   m_EditorClassIdentifier: 
   _level: {fileID: 6857288945812518056, guid: ad3f327b03c066340b025659fcaf188c, type: 3}
-  _time: 25
+  _time: 50
   _reward: 15
+  _mapScale: {x: 5, y: 0, z: 5}
+  _mapPosition: {x: 0, y: 0, z: 0}

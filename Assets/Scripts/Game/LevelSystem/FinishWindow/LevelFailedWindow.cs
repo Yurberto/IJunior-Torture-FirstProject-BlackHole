@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Game.LevelSystem.Award;
+﻿using Assets.Scripts.Game.ScriptableObjects;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,21 +6,25 @@ using YG;
 
 namespace Assets.Scripts.Game.LevelSystem
 {
-    public class LevelCompletedWindow : MonoBehaviour
+    public class LevelFailedWindow : MonoBehaviour
     {
         [SerializeField] private Button _backToMenu;
         [SerializeField] private Button _watchRewardAd;
 
         [SerializeField] private CanvasSwitcher _canvasSwitcher;
 
-        private LevelAdRewarder _adRewarder;
+        private LevelSpawner _levelSpawner;
+        private AdAwarder _adAwarder;
 
-        public void Init(LevelAdRewarder adRewarder)
+        public void Init(LevelSpawner levelSpawner, AdAwarder adAwarder)
         {
-            if (adRewarder == null) 
-                throw new ArgumentNullException(nameof(adRewarder));
+            if (levelSpawner == null) 
+                throw new ArgumentNullException(nameof(levelSpawner));
+            if (adAwarder == null)
+                throw new ArgumentNullException(nameof(adAwarder));
 
-            _adRewarder = adRewarder;
+            _levelSpawner = levelSpawner;
+            _adAwarder = adAwarder;
         }
 
         private void OnEnable()
@@ -37,19 +41,23 @@ namespace Assets.Scripts.Game.LevelSystem
 
         private void BackToMenu()
         {
-            _canvasSwitcher.CloseLevelCompleted();
+            _levelSpawner.DestroyLastSpawned();
+
+            _canvasSwitcher.CloseLevelFailed();
             _canvasSwitcher.OpenMainMenu();
         }
 
         private void WatchRevardAd()
         {
-            YG2.RewardedAdvShow(RewardTypes.CoinsMultiply);
+            YG2.RewardedAdvShow(RewardTypes.CoinsAdd);
             YG2.onCloseRewardedAdv += OnCloseAdv;
         }
 
         private void OnCloseAdv()
         {
-            _adRewarder.Reward(RewardType.CoinsMultiply);
+            YG2.onCloseRewardedAdv -= OnCloseAdv;
+
+            _adAwarder.AwardAddMoney();
             BackToMenu();
         }
     }

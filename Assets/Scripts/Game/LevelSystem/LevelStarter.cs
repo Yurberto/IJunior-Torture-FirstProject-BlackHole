@@ -10,10 +10,8 @@ namespace Assets.Scripts.Game.LevelSystem
         private CanvasSwitcher _canvasSwitcher;
         private LevelConfigsHub _levelConfigsHub;
 
-        private LevelSpawner _levelSpawner;
-        private LevelTimer _timer;
+        private LevelTimer _levelTimer;
         private LevelResultTracker _resultTracker;
-        private LevelFinisher _finisher;
 
         private HoleMover _holeMover;
         private AbsorbBar _absorbBar;
@@ -24,10 +22,8 @@ namespace Assets.Scripts.Game.LevelSystem
             (
             CanvasSwitcher canvasSwitcher,
             LevelConfigsHub levelConfigsHub,
-            LevelSpawner levelSpawner,
-            LevelTimer timer,
+            LevelTimer levelTimer,
             LevelResultTracker resultTracker,
-            LevelFinisher finisher,
             HoleMover holeMover,
             AbsorbHandler absorbHandler,
             AbsorbBar absorbBar,
@@ -38,14 +34,10 @@ namespace Assets.Scripts.Game.LevelSystem
                 throw new ArgumentNullException(nameof(canvasSwitcher));
             if (levelConfigsHub == null)
                 throw new ArgumentException(nameof(levelConfigsHub));
-            if (levelSpawner == null)
-                throw new ArgumentException(nameof(levelSpawner));
-            if (timer == null)
-                throw new ArgumentNullException(nameof(timer));
+            if (levelTimer == null)
+                throw new ArgumentNullException(nameof(levelTimer));
             if (resultTracker == null)
                 throw new ArgumentNullException(nameof(resultTracker));
-            if (finisher == null)
-                throw new ArgumentNullException(nameof(finisher));
             if (holeMover == null)
                 throw new ArgumentNullException(nameof(holeMover));
             if (absorbHandler == null)
@@ -57,24 +49,21 @@ namespace Assets.Scripts.Game.LevelSystem
 
             _canvasSwitcher = canvasSwitcher;
             _levelConfigsHub = levelConfigsHub;
-            _levelSpawner = levelSpawner;
-            _timer = timer;
+            _levelTimer = levelTimer;
             _resultTracker = resultTracker;
-            _finisher = finisher;
             _holeMover = holeMover;
             _absorbHandler = absorbHandler;
             _absorbBar = absorbBar;
             _levelHoleScaler = levelHoleScaler;
         }
 
-        public void Start()
+        public void StartLevel()
         {
-            _levelSpawner.SpawnCurrentLevel();
             _canvasSwitcher.OpenLevel();
 
             LevelConfig currentLevelConfig = _levelConfigsHub.GetCurrent();
 
-            _timer.Start(currentLevelConfig.Time);
+            _levelTimer.Start(currentLevelConfig.Time);
             _resultTracker.Track(currentLevelConfig.ObjectsCount);
 
             _resultTracker.LevelFailed += OnLevelFailed;
@@ -89,23 +78,28 @@ namespace Assets.Scripts.Game.LevelSystem
         private void OnLevelCompleted()
         {
             OnFinish();
-            _finisher.OnLevelCompleted();
 
-            _timer.Stop();
+            _canvasSwitcher.CloseLevel();
+            _canvasSwitcher.OpenLevelCompletedWindow();
         }
 
         private void OnLevelFailed()
         {
             OnFinish();
-            _finisher.OnlevelFailed();
+
+            _canvasSwitcher.CloseLevel();
+            _canvasSwitcher.OpenLevelFailedWindow();
         }
 
         private void OnFinish()
         {
             _holeMover.StopMoving();
             _holeMover.BackToStartPosition();
+
             _absorbBar.Unsubscribe();
+
             _levelHoleScaler.Stop();
+            _levelTimer.Stop();
 
             _resultTracker.LevelFailed -= OnLevelFailed;
             _resultTracker.LevelCompleted -= OnLevelCompleted;

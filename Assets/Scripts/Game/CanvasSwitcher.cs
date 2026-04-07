@@ -28,11 +28,11 @@ namespace Assets.Scripts.Game
             _level.gameObject.SetActive(true);
         }
 
-        public void OpenLevelFailed()
+        public void OpenLevelFailedWindow()
         {
             _levelFailed.gameObject.SetActive(true);
         }
-        public void OpenLevelCompleted()
+        public void OpenLevelCompletedWindow()
         {
             _levelCompleted.gameObject.SetActive(true);
         }

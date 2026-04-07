@@ -26,7 +26,7 @@ namespace Assets.Scripts.Test
         private void Add()
         {
             Debug.Log($"Add_moneyAdder");
-            _wallet.AddMoney((int)(_amount * _money.Ratio));
+            _wallet.AddMoney(_amount * _money.Ratio);
         }
     }
 }

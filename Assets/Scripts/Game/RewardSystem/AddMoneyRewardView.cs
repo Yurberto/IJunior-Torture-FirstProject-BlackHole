@@ -3,12 +3,13 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace Assets.Scripts.Game.LevelSystem.Award
+namespace Assets.Scripts.Game.RewardSystem
 {
-    public class LevelRewardView : MonoBehaviour
+    public class AddMoneyRewardView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _text;
-        [SerializeField] private LevelConfigsHub _levelConfigsHub;
+
+        [SerializeField] private RewardsConfig _rewardsConfig;
 
         private Ability _money;
 
@@ -22,7 +23,7 @@ namespace Assets.Scripts.Game.LevelSystem.Award
 
         private void OnEnable()
         {
-            _text.text = $"+{Mathf.CeilToInt(_levelConfigsHub.GetCurrent().Reward * _money.Ratio)}";
+            _text.text = $"+{Mathf.CeilToInt(_rewardsConfig.AddMoney * _money.Ratio)}";
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using YG;
 
 namespace Assets.Scripts.WalletSystem
@@ -27,6 +28,11 @@ namespace Assets.Scripts.WalletSystem
 
             _moneyAmount += amount;
             Persist();
+        }
+
+        public void AddMoney(float amount)
+        {
+            AddMoney(Mathf.CeilToInt(amount));
         }
 
         public bool TryPay(int amount)

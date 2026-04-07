@@ -2,8 +2,10 @@
 using Assets.Scripts.Game.LevelSystem;
 using Assets.Scripts.Game.LevelSystem.Award;
 using Assets.Scripts.Game.LevelSystem.Time;
+using Assets.Scripts.Game.RewardSystem;
 using Assets.Scripts.Game.Time;
 using Assets.Scripts.Hole;
+using Assets.Scripts.Hole.Map;
 using Assets.Scripts.Hole.Scale;
 using Assets.Scripts.WalletSystem;
 using UnityEngine;
@@ -19,6 +21,9 @@ namespace Assets.Scripts.Game
 
         [Header("Camera")]
         [SerializeField] private TargetFollower _targetFollower;
+
+        [Header("Map")]
+        [SerializeField] private Transform _mapTransform;
 
         [Header("AbilityStats")]
         [SerializeField] private BaseAbilityStats _startSizeBaseStats;
@@ -54,12 +59,16 @@ namespace Assets.Scripts.Game
 
         [Header("Wallet")]
         [SerializeField] private WalletView _walletView;
+        [SerializeField] private RewardsConfig _rewardsConfig;
+        [SerializeField] private AddMoneyRewardView _addMoneyRewardView;
 
         [Header("Timer")]
         [SerializeField] private LevelTimerView _levelTimerView;
 
         private GameHoleScaler _gameHoleScaler;
         private LevelHoleScaler _levelHoleScaler;
+
+        private Map _map;
 
         private AbsorbHandler _absorbHandler;
 
@@ -82,9 +91,8 @@ namespace Assets.Scripts.Game
 
         private LevelTimer _levelTimer;
         private LevelStarter _levelStarter;
-        private LevelFinisher _levelFinisher;
         private LevelResultTracker _levelResultTracker;
-        private LevelAdRewarder _levelAdRewarder;
+        private AdAwarder _adAwarder;
 
         private Wallet _wallet;
 
@@ -100,6 +108,8 @@ namespace Assets.Scripts.Game
             _levelConfigsHub.Init(YG2.saves.CurrentLevel);
             _wallet = new Wallet(YG2.saves.MoneyCount);
             //_wallet = new Wallet(10);
+
+            _map = new Map(_mapTransform, _levelConfigsHub);
 
             _startSize = new Ability(_startSizeBaseStats, YG2.saves.StartSizeInfo, isFirstLaunch);
             _scale = new Ability(_scaleBaseStats, YG2.saves.ScaleInfo, isFirstLaunch);
@@ -137,22 +147,24 @@ namespace Assets.Scripts.Game
             _levelAwarder = new LevelAwarder(_wallet, _money);
 
             _levelTimer = new LevelTimer(_timerService);
-            _levelFinisher = new LevelFinisher(_canvasSwitcher, _levelSpawner, _levelConfigsHub, _levelAwarder);
             _levelResultTracker = new LevelResultTracker(_absorber, _levelTimer);
-            _levelAdRewarder = new LevelAdRewarder(_money, _wallet, _levelConfigsHub);
+            _adAwarder = new AdAwarder(_wallet, _money, _rewardsConfig);
+            _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _levelTimer, _levelResultTracker, _holeMover, _absorbHandler, _absorbBar, _levelHoleScaler);
 
-            _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _levelSpawner, _levelTimer, _levelResultTracker, _levelFinisher, _holeMover, _absorbHandler, _absorbBar, _levelHoleScaler);
-            _mainMenu.Init(_levelStarter);
+            _mainMenu.Init(_levelStarter, _levelSpawner);
+            _levelCompletedWindow.Init(_adAwarder, _levelAwarder, _levelSpawner);
+            _levelFailedWindow.Init(_levelSpawner, _adAwarder);
 
             _walletView.Init(_wallet);
-            _levelRewardView.Init(_levelAwarder);
+            _levelRewardView.Init(_money);
             _currentLevelView.Init(_levelConfigsHub);
 
-            _levelCompletedWindow.Init(_levelAdRewarder);
-            _levelFailedWindow.Init(_levelSpawner);
+            _addMoneyRewardView.Init(_money);
 
             _targetFollower.Init(_holeScalerView);
             _holeMover.Init(_holeScalerView);
+
+            _mainMenu.Opened += _map.AdjustToCurrentLevel;
 
             _canvasSwitcher.OpenMainMenu();
         }
@@ -181,11 +193,12 @@ namespace Assets.Scripts.Game
             _holeScalerView.UnSubscribe();
             _holeMover.StopMoving();
 
-            _levelRewardView.Dispose();
             _currentLevelView.Dispose();
 
             _targetFollower.Dispose();
             _holeMover.Dispose();
+
+            _mainMenu.Opened -= _map.AdjustToCurrentLevel;
         }
     }
 }

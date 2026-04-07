@@ -46,10 +46,9 @@ namespace Assets.Scripts.Game.Time
             while (_time > 0)
             {
                 Tick?.Invoke(_time);
+                --_time;
 
                 await UniTask.Delay(1000, cancellationToken: token);
-
-                --_time;
             }
 
             if (token.IsCancellationRequested == false)

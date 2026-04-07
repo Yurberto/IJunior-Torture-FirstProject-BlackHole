@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Scale_BaseStats
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Scale
-  <Cost>k__BackingField: 1
+  <Cost>k__BackingField: 5
   <Level>k__BackingField: 1
-  <Ratio>k__BackingField: 1
-  <UpLevelRatioGrowth>k__BackingField: 1.1
+  <Ratio>k__BackingField: 1.05
+  <UpLevelRatioGrowth>k__BackingField: 1.02
   <UpLevelCostGrowth>k__BackingField: 1.2

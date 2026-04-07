@@ -4,8 +4,6 @@ namespace Assets.Scripts.Game.Time
 {
     public class LevelTimer
     {
-        private const int MaxTime = 99;
-
         private TimerService _timerService;
 
         public LevelTimer(TimerService timerService)
@@ -22,7 +20,7 @@ namespace Assets.Scripts.Game.Time
         {
             if (_timerService == null)
                 throw new ArgumentNullException(nameof(_timerService));
-            if (time <= 0 || time > MaxTime)
+            if (time <= 0)
                 throw new ArgumentOutOfRangeException(nameof(time));
 
             _timerService.Start(time);
