@@ -43,7 +43,7 @@ namespace Assets.Scripts.Game.LevelSystem
         {
             _levelSpawner.DestroyLastSpawned();
 
-            _canvasSwitcher.CloseLevelFailed();
+            _canvasSwitcher.CloseLevelFailedWindow();
             _canvasSwitcher.OpenMainMenu();
         }
 

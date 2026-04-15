@@ -3,7 +3,7 @@ using Assets.Scripts.Game.LevelSystem;
 using Assets.Scripts.Game.LevelSystem.Award;
 using Assets.Scripts.Game.LevelSystem.Time;
 using Assets.Scripts.Game.RewardSystem;
-using Assets.Scripts.Game.Time;
+using Assets.Scripts.Game.Timer;
 using Assets.Scripts.Hole;
 using Assets.Scripts.Hole.Map;
 using Assets.Scripts.Hole.Scale;
@@ -18,6 +18,7 @@ namespace Assets.Scripts.Game
         [Header("Core")]
         [SerializeField] private CanvasSwitcher _canvasSwitcher;
         [SerializeField] private MainMenu _mainMenu;
+        [SerializeField] private Pause _pause;
 
         [Header("Camera")]
         [SerializeField] private TargetFollower _targetFollower;
@@ -106,8 +107,8 @@ namespace Assets.Scripts.Game
                 YG2.saves.OnFirstLaunch();
 
             _levelConfigsHub.Init(YG2.saves.CurrentLevel);
-            _wallet = new Wallet(YG2.saves.MoneyCount);
-            //_wallet = new Wallet(10);
+            //_wallet = new Wallet(YG2.saves.MoneyCount);
+            _wallet = new Wallet(1000);
 
             _map = new Map(_mapTransform, _levelConfigsHub);
 
@@ -149,7 +150,7 @@ namespace Assets.Scripts.Game
             _levelTimer = new LevelTimer(_timerService);
             _levelResultTracker = new LevelResultTracker(_absorber, _levelTimer);
             _adAwarder = new AdAwarder(_wallet, _money, _rewardsConfig);
-            _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _levelTimer, _levelResultTracker, _holeMover, _absorbHandler, _absorbBar, _levelHoleScaler);
+            _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _pause, _levelTimer, _levelResultTracker, _holeMover, _absorbHandler, _absorbBar, _levelHoleScaler);
 
             _mainMenu.Init(_levelStarter, _levelSpawner);
             _levelCompletedWindow.Init(_adAwarder, _levelAwarder, _levelSpawner);

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assets.Scripts.Game.Time
+namespace Assets.Scripts.Game.Timer
 {
     public class LevelTimer
     {

@@ -1,7 +1,6 @@
-﻿using Assets.Scripts.Game.Time;
+﻿using Assets.Scripts.Game.Timer;
 using Assets.Scripts.Hole;
 using System;
-using UnityEngine;
 
 namespace Assets.Scripts.Game.LevelSystem
 {
@@ -36,7 +35,7 @@ namespace Assets.Scripts.Game.LevelSystem
             _timer.HasOver += OnTimerFinished;
         }
 
-        private void StopTracking()
+        public void StopTracking()
         {
             _absorber.FallingObjectAbsorbed -= OnFallingObjectAbsorbed;
             _timer.HasOver -= OnTimerFinished;
@@ -44,6 +43,7 @@ namespace Assets.Scripts.Game.LevelSystem
 
         private void OnFallingObjectAbsorbed()
         {
+            UnityEngine.Debug.Log($"ObjectAbsorbed_ResultTRacker - {_currentAbsorbtions + 1}");
             if (++_currentAbsorbtions >= _reachedAbsorptions)
             {
                 LevelCompleted?.Invoke();

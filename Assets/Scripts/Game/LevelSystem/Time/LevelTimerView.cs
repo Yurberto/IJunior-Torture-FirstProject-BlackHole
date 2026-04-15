@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Game.Time;
+﻿using Assets.Scripts.Game.Timer;
 using System;
 using TMPro;
 using UnityEngine;

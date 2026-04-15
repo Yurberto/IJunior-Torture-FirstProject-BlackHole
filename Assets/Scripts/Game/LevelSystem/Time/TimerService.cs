@@ -3,7 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts.Game.Time
+namespace Assets.Scripts.Game.Timer
 {
     public class TimerService
     {

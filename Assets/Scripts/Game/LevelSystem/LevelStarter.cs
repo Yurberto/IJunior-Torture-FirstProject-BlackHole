@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Game.Time;
+﻿using Assets.Scripts.Game.Timer;
 using Assets.Scripts.Hole;
 using Assets.Scripts.Hole.Scale;
 using System;
@@ -9,6 +9,7 @@ namespace Assets.Scripts.Game.LevelSystem
     {
         private CanvasSwitcher _canvasSwitcher;
         private LevelConfigsHub _levelConfigsHub;
+        private Pause _pauseMenu;
 
         private LevelTimer _levelTimer;
         private LevelResultTracker _resultTracker;
@@ -22,6 +23,7 @@ namespace Assets.Scripts.Game.LevelSystem
             (
             CanvasSwitcher canvasSwitcher,
             LevelConfigsHub levelConfigsHub,
+            Pause pauseMenu,
             LevelTimer levelTimer,
             LevelResultTracker resultTracker,
             HoleMover holeMover,
@@ -34,6 +36,8 @@ namespace Assets.Scripts.Game.LevelSystem
                 throw new ArgumentNullException(nameof(canvasSwitcher));
             if (levelConfigsHub == null)
                 throw new ArgumentException(nameof(levelConfigsHub));
+            if (pauseMenu == null)
+                throw new ArgumentException(nameof(pauseMenu));
             if (levelTimer == null)
                 throw new ArgumentNullException(nameof(levelTimer));
             if (resultTracker == null)
@@ -49,8 +53,11 @@ namespace Assets.Scripts.Game.LevelSystem
 
             _canvasSwitcher = canvasSwitcher;
             _levelConfigsHub = levelConfigsHub;
+            _pauseMenu = pauseMenu;
+
             _levelTimer = levelTimer;
             _resultTracker = resultTracker;
+
             _holeMover = holeMover;
             _absorbHandler = absorbHandler;
             _absorbBar = absorbBar;
@@ -73,6 +80,8 @@ namespace Assets.Scripts.Game.LevelSystem
             _absorbBar.Subscribe();
             _absorbHandler.Reset();
             _levelHoleScaler.Start();
+
+            _pauseMenu.BackToMenuPressed += OnFinish;
         }
 
         private void OnLevelCompleted()
@@ -93,6 +102,8 @@ namespace Assets.Scripts.Game.LevelSystem
 
         private void OnFinish()
         {
+            _pauseMenu.BackToMenuPressed -= OnFinish;
+
             _holeMover.StopMoving();
             _holeMover.BackToStartPosition();
 
@@ -100,6 +111,7 @@ namespace Assets.Scripts.Game.LevelSystem
 
             _levelHoleScaler.Stop();
             _levelTimer.Stop();
+            _resultTracker.StopTracking();
 
             _resultTracker.LevelFailed -= OnLevelFailed;
             _resultTracker.LevelCompleted -= OnLevelCompleted;

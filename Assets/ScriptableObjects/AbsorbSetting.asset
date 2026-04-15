@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6652b63fb008a4e4fb825da0a8142dd2, type: 3}
   m_Name: AbsorbSetting
   m_EditorClassIdentifier: 
-  _upScaleMass: 35
+  _upScaleMass: 25
   _baseAbsorbMass: 0
   _baseLevelOfRequirings: 1

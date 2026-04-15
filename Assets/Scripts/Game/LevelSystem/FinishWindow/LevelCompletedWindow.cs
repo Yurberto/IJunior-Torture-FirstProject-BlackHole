@@ -66,7 +66,7 @@ namespace Assets.Scripts.Game.LevelSystem
 
         private void BackToMenu()
         {
-            _canvasSwitcher.CloseLevelCompleted();
+            _canvasSwitcher.CloseLevelCompletedWindow();
             _canvasSwitcher.OpenMainMenu();
 
             _levelSpawner.DestroyLastSpawned();
