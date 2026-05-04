@@ -8,11 +8,14 @@ namespace Assets.Scripts.Hole.Scale
     public class HoleScalerView : MonoBehaviour
     {
         private const float TriggerEnterScaleFactor = 0.25f;
+        private const float AbsorberScaleFactor = 2f;
+        private const float ParticleScaleFactor = 4;
 
         [SerializeField] private SphereCollider _enterTrigger;
-        [SerializeField] private BoxCollider _absorbTrigger;
+        [SerializeField] private Transform _absorber;
         [SerializeField] private Transform _edging;
         [SerializeField] private Transform _cylinder;
+        [SerializeField] private Transform _particleSystem;
 
         private GameHoleScaler _gameHoleScaler;
         private LevelHoleScaler _levelHoleScaler;
@@ -57,10 +60,11 @@ namespace Assets.Scripts.Hole.Scale
                 throw new ArgumentOutOfRangeException(nameof(newSize));
 
             _enterTrigger.radius = newSize * TriggerEnterScaleFactor;
-            _absorbTrigger.size = new Vector3(newSize, _absorbTrigger.size.y, newSize);
+            _absorber.localScale = new Vector3(newSize * AbsorberScaleFactor, _absorber.localScale.y, newSize * AbsorberScaleFactor);
 
             _edging.localScale = new Vector3(newSize, _edging.localScale.y, newSize);
             _cylinder.localScale = new Vector3(newSize, _cylinder.localScale.y, newSize);
+            _particleSystem.localScale = new Vector3(newSize * ParticleScaleFactor, _particleSystem.localScale.y, newSize * ParticleScaleFactor);
             
             SizeUpdated?.Invoke(newSize);
         }

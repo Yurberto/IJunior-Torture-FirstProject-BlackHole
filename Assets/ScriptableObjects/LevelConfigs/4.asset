@@ -15,5 +15,5 @@ MonoBehaviour:
   _level: {fileID: 5206984225197666833, guid: ee6f6361fe8fda44ca66192d48ae1f0f, type: 3}
   _time: 50
   _reward: 13
-  _mapScale: {x: 3.5, y: 0, z: 4.5}
+  _mapScale: {x: 4, y: 0, z: 5}
   _mapPosition: {x: 0, y: 0, z: 1}
