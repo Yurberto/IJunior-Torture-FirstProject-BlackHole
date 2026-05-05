@@ -1,16 +1,18 @@
-﻿using System;
+﻿using Assets.Scripts.Game.Interfases;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
 
 namespace Assets.Scripts.Game.LevelSystem
 {
-    public class LevelCompletedWindow : MonoBehaviour
+    public class LevelCompletedWindow : MonoBehaviour, GameCanvas
     {
+        [SerializeField] private MainMenu _mainMenu;
+        [Space]
         [SerializeField] private Button _backToMenu;
         [SerializeField] private Button _watchRewardAd;
 
-        [SerializeField] private CanvasSwitcher _canvasSwitcher;
         [SerializeField] private LevelConfigsHub _levelConfigsHub;
 
         private AdAwarder _adAwarder;
@@ -32,14 +34,16 @@ namespace Assets.Scripts.Game.LevelSystem
             _levelSpawner = levelSpawner;
         }
 
-        private void OnEnable()
+        public void Open()
         {
+            gameObject.SetActive(true);
             _backToMenu.onClick.AddListener(OnBackToMenuButtonClicked);
             _watchRewardAd.onClick.AddListener(WatchRevardAd);
         }
 
-        private void OnDisable()
+        private void Close()
         {
+            gameObject.SetActive(false);
             _backToMenu.onClick.RemoveListener(OnBackToMenuButtonClicked);
             _watchRewardAd.onClick.RemoveListener(WatchRevardAd);
         }
@@ -66,8 +70,8 @@ namespace Assets.Scripts.Game.LevelSystem
 
         private void BackToMenu()
         {
-            _canvasSwitcher.CloseLevelCompletedWindow();
-            _canvasSwitcher.OpenMainMenu();
+            Close();
+            _mainMenu.Open();
 
             _levelSpawner.DestroyLastSpawned();
             _levelConfigsHub.SwitchToNextLevel();

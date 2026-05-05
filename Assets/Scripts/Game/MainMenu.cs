@@ -1,17 +1,20 @@
-﻿using Assets.Scripts.Game.LevelSystem;
+﻿using Assets.Scripts.Game.Interfases;
+using Assets.Scripts.Game.LevelSystem;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Game
 {
-    public class MainMenu : MonoBehaviour
+    public class MainMenu : MonoBehaviour, GameCanvas
     {
+        [SerializeField] private Settings _settings;
+
+        [Space]
+
         [SerializeField] private Button _startLevelButton;
         [SerializeField] private Button _openSettingsButton;
         [SerializeField] private Button _openShopButton;
-        [Space]
-        [SerializeField] private CanvasSwitcher _canvasSwitcher;
 
         private LevelStarter _levelStarter;
         private LevelSpawner _levelSpawner;
@@ -30,8 +33,10 @@ namespace Assets.Scripts.Game
         public event Action Opened;
         public event Action Closed;
 
-        private void OnEnable()
+        public void Open()
         {
+            gameObject.SetActive(true);
+
             _startLevelButton.onClick.AddListener(StartLevel);
             _openSettingsButton.onClick.AddListener(OpenSettings);
             _openShopButton.onClick.AddListener(OpenShop);
@@ -39,31 +44,35 @@ namespace Assets.Scripts.Game
             Opened?.Invoke();
         }
 
-        private void OnDisable()
+        public void Close()
         {
             _startLevelButton.onClick.RemoveListener(StartLevel);
             _openSettingsButton.onClick.RemoveListener(OpenSettings);
             _openShopButton.onClick.RemoveListener(OpenShop);
+
+            gameObject.SetActive(false);
 
             Closed?.Invoke();
         }
 
         private void StartLevel()
         {
-            _canvasSwitcher.CloseMainMenu();
+            Close();
             _levelStarter.StartLevel();
             _levelSpawner.SpawnCurrentLevel();
         }
 
         private void OpenSettings()
         {
-            _canvasSwitcher.CloseMainMenu();
-            _canvasSwitcher.OpenSettings();
+            UnityEngine.Debug.Log($"MainMenu_OpenSettings");
+            Close();
+            _settings.SetPrevious(this);
+            _settings.Open();
         }
 
         private void OpenShop()
         {
-            _canvasSwitcher.CloseMainMenu();
+            Close();
         }
     }
 }

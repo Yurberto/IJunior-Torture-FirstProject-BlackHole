@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Audio;
+using Assets.Scripts.Game.Interfases;
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -6,10 +7,8 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.Game
 {
-    public class Settings : MonoBehaviour
+    public class Settings : MonoBehaviour, GameCanvas
     {
-        [SerializeField] private CanvasSwitcher _canvasSwitcher;
-        [Space]
         [SerializeField] private Button _closeButton;
 
         [SerializeField] private Slider _masterVolume;
@@ -19,6 +18,8 @@ namespace Assets.Scripts.Game
         [SerializeField] private AudioMixer _audioMixer;
         [SerializeField] private AudioGroupNames _audioGroupNames;
 
+        private GameCanvas _previous;
+
         private void Awake()
         {
             UpdateMasterVolume(_masterVolume.value);
@@ -26,30 +27,37 @@ namespace Assets.Scripts.Game
             UpdateSFXVolume(_sfxVolume.value);
         }
 
-        private void OnEnable()
+        public void SetPrevious(GameCanvas previous)
         {
-            Debug.Log("OnEnable_Settings");
-            _closeButton.onClick.AddListener(LeaveToMenu);
+            UnityEngine.Debug.Log($"Settings_SetPrevious");
+            if (previous == null)
+                throw new ArgumentNullException(nameof(previous));
 
+            _previous = previous;
+        }
+
+        public void Open()
+        {
+            UnityEngine.Debug.Log($"Settings_Open");
+            if (_previous == null)
+                throw new ArgumentNullException(nameof(_previous));
+
+            gameObject.SetActive(true);
+
+            _closeButton.onClick.AddListener(BackToPrevious);
             Subscribe();
         }
 
-        private void OnDisable()
+        public void BackToPrevious()
         {
-            Debug.Log("OnDisable_Settings");
-            _closeButton.onClick.RemoveListener(LeaveToMenu);
-
+            UnityEngine.Debug.Log($"Settings_BackToPrevious");
+            _closeButton.onClick.RemoveListener(BackToPrevious);
             UnSubscribe();
+
+            gameObject.SetActive(false);
+            _previous.Open();
+            _previous = null;
         }
-
-        private void LeaveToMenu()
-        {
-            Debug.Log("Close_Settings");
-
-            _canvasSwitcher.CloseSetting();
-            _canvasSwitcher.OpenMainMenu();
-        }
-
 
         private void Subscribe()
         {

@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 5517528260587271423}
   - component: {fileID: 5485038405405813221}
   m_Layer: 0
-  m_Name: Setting_Button
+  m_Name: OpenSettings_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -356,15 +356,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80b827d9d48b2e44ae8480b5e0fa953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _masterVolume: {fileID: 0}
-  _musicVolume: {fileID: 0}
-  _sfxVolume: {fileID: 0}
-  _audioMixer: {fileID: 24100000, guid: 6043d3c5a7779b84599c7e89b5110d20, type: 2}
-  _audioGroupNames: {fileID: 11400000, guid: bc6454e5c52578a4cad1e5a34088c261, type: 2}
+  _mainMenu: {fileID: 0}
+  _settings: {fileID: 0}
+  _level: {fileID: 0}
   _closeButton: {fileID: 4191455448115605504}
-  _continueButton: {fileID: 7703686321729408673}
   _backToMenuButton: {fileID: 7813311269619162450}
-  _canvasSwitcher: {fileID: 0}
+  _openSettingsButton: {fileID: 5485038405405813221}
+  _continueButton: {fileID: 7703686321729408673}
 --- !u!1 &4056705450627291047
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,9 +982,9 @@ RectTransform:
   m_Children:
   - {fileID: 2655999346750723888}
   - {fileID: 5431200487334993272}
+  - {fileID: 7279966397704122633}
   - {fileID: 1632657125151525045}
   - {fileID: 7210306014363059692}
-  - {fileID: 7279966397704122633}
   m_Father: {fileID: 2478933338903127322}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

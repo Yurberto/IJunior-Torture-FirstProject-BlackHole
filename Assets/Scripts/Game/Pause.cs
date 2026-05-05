@@ -1,100 +1,72 @@
 ﻿using Assets.Scripts.Audio;
+using Assets.Scripts.Game.Interfases;
 using System;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Game
 {
-    public class Pause : MonoBehaviour
+    public class Pause : MonoBehaviour, GameCanvas
     {
-        [SerializeField] private Slider _masterVolume;
-        [SerializeField] private Slider _musicVolume;
-        [SerializeField] private Slider _sfxVolume;
-
-        [SerializeField] private AudioMixer _audioMixer;
-        [SerializeField] private AudioGroupNames _audioGroupNames;
-
+        [SerializeField] private MainMenu _mainMenu;
+        [SerializeField] private Settings _settings;
+        [SerializeField] private Level _level;
+        [Space(16)]
         [SerializeField] private Button _closeButton;
-        [SerializeField] private Button _continueButton;
+        [Space]
         [SerializeField] private Button _backToMenuButton;
-
-        [SerializeField] private CanvasSwitcher _canvasSwitcher;
+        [SerializeField] private Button _openSettingsButton;
+        [SerializeField] private Button _continueButton;
 
         public event Action BackToMenuPressed;
 
-        private void OnEnable()
+        public void Open()
         {
             Time.timeScale = 0;
 
             _closeButton.onClick.AddListener(Continue);
-            _continueButton.onClick.AddListener(Continue);
+
             _backToMenuButton.onClick.AddListener(BackToMenu);
+            _openSettingsButton.onClick.AddListener(OpenSettings);
+            _continueButton.onClick.AddListener(Continue);
 
-            Subscribe();
+            gameObject.SetActive(true);
         }
 
-        private void OnDisable()
+        private void Close()
         {
-            Time.timeScale = 1;
-
             _closeButton.onClick.RemoveListener(Continue);
-            _continueButton.onClick.RemoveListener(Continue);
+
             _backToMenuButton.onClick.RemoveListener(BackToMenu);
+            _openSettingsButton.onClick.RemoveListener(OpenSettings);
+            _continueButton.onClick.RemoveListener(Continue);
 
-            UnSubscribe();
-        }
-
-        private void Subscribe()
-        {
-            _masterVolume.onValueChanged.AddListener(UpdateMasterVolume);
-            _musicVolume.onValueChanged.AddListener(UpdateMusicVolume);
-            _sfxVolume.onValueChanged.AddListener(UpdateSFXVolume);
-        }
-
-        private void UnSubscribe()
-        {
-            _masterVolume.onValueChanged.RemoveListener(UpdateMasterVolume);
-            _musicVolume.onValueChanged.RemoveListener(UpdateMusicVolume);
-            _sfxVolume.onValueChanged.RemoveListener(UpdateSFXVolume);
-        }
-
-        private void Continue()
-        {
-            _canvasSwitcher.ClosePause();
-            _canvasSwitcher.OpenLevel();
+            gameObject.SetActive(false);
         }
 
         private void BackToMenu()
         {
-            _canvasSwitcher.ClosePause();
-            _canvasSwitcher.OpenMainMenu();
+            Time.timeScale = 1;
+
+            Close();
+            _level.Close();
+            _mainMenu.Open();
 
             BackToMenuPressed?.Invoke();
         }
 
-        private void UpdateMasterVolume(float value)
+        private void OpenSettings()
         {
-            if (value > 1 || value < 0)
-                throw new ArgumentOutOfRangeException(nameof(value));
-
-            _audioMixer.SetFloat(_audioGroupNames.Master, value.ToDecibel());
+            UnityEngine.Debug.Log($"Pause_OpenSettings");
+            _settings.SetPrevious(this);
+            _settings.Open();
         }
 
-        private void UpdateMusicVolume(float value)
+        private void Continue()
         {
-            if (value > 1 || value < 0)
-                throw new ArgumentOutOfRangeException(nameof(value));
+            Time.timeScale = 1;
 
-            _audioMixer.SetFloat(_audioGroupNames.Music, value.ToDecibel());
-        }
-
-        private void UpdateSFXVolume(float value)
-        {
-            if (value > 1 || value < 0)
-                throw new ArgumentOutOfRangeException(nameof(value));
-
-            _audioMixer.SetFloat(_audioGroupNames.SFX, value.ToDecibel());
+            Close();
         }
     }
 }

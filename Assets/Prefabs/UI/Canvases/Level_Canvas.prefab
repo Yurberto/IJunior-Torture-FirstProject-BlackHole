@@ -119,8 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d1a55db53463004faf516578afafc9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pause: {fileID: 0}
   _openPause: {fileID: 7845371753150378504}
-  _canvasSwitcher: {fileID: 0}
 --- !u!1 &3139175994546448638
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +380,7 @@ GameObject:
   - component: {fileID: 4003322488270813045}
   - component: {fileID: 3544345455156904521}
   - component: {fileID: 7344539977824686757}
+  - component: {fileID: 2685188455612738859}
   m_Layer: 5
   m_Name: LevelNumber_View
   m_TagString: Untagged
@@ -503,6 +504,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2685188455612738859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7042582141684927514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c717ee51efd66ab4c9de860938c8a21f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelConfigsHub: {fileID: 11400000, guid: 212d883755c2daa44b1d53c838d6557e, type: 2}
+  _text: {fileID: 7344539977824686757}
 --- !u!1 &7348546084030062040
 GameObject:
   m_ObjectHideFlags: 0

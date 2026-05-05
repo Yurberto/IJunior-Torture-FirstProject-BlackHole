@@ -1712,10 +1712,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f6f9bb6659eccb48a09abdfc1042176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _settings: {fileID: 0}
   _startLevelButton: {fileID: 9044062820727919686}
   _openSettingsButton: {fileID: 5811546914090010225}
   _openShopButton: {fileID: 8988101108680916540}
-  _canvasSwitcher: {fileID: 0}
 --- !u!1 &3760808408261597341
 GameObject:
   m_ObjectHideFlags: 0
@@ -8549,6 +8549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c717ee51efd66ab4c9de860938c8a21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelConfigsHub: {fileID: 11400000, guid: 212d883755c2daa44b1d53c838d6557e, type: 2}
   _text: {fileID: 5387216021335007646}
 --- !u!1 &8000750064089775216
 GameObject:

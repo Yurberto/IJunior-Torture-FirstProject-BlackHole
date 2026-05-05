@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Game.ScriptableObjects;
+﻿using Assets.Scripts.Game.Interfases;
+using Assets.Scripts.Game.ScriptableObjects;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,12 +7,12 @@ using YG;
 
 namespace Assets.Scripts.Game.LevelSystem
 {
-    public class LevelFailedWindow : MonoBehaviour
+    public class LevelFailedWindow : MonoBehaviour, GameCanvas
     {
+        [SerializeField] private MainMenu _mainMenu;
+        [Space]
         [SerializeField] private Button _backToMenu;
         [SerializeField] private Button _watchRewardAd;
-
-        [SerializeField] private CanvasSwitcher _canvasSwitcher;
 
         private LevelSpawner _levelSpawner;
         private AdAwarder _adAwarder;
@@ -27,14 +28,16 @@ namespace Assets.Scripts.Game.LevelSystem
             _adAwarder = adAwarder;
         }
 
-        private void OnEnable()
+        public void Open()
         {
+            gameObject.SetActive(true);
             _backToMenu.onClick.AddListener(BackToMenu);
             _watchRewardAd.onClick.AddListener(WatchRevardAd);
         }
 
-        private void OnDisable()
+        private void Close()
         {
+            gameObject.SetActive(false);
             _backToMenu.onClick.RemoveListener(BackToMenu);
             _watchRewardAd.onClick.RemoveListener(WatchRevardAd);
         }
@@ -43,8 +46,8 @@ namespace Assets.Scripts.Game.LevelSystem
         {
             _levelSpawner.DestroyLastSpawned();
 
-            _canvasSwitcher.CloseLevelFailedWindow();
-            _canvasSwitcher.OpenMainMenu();
+            Close();
+            _mainMenu.Open();
         }
 
         private void WatchRevardAd()

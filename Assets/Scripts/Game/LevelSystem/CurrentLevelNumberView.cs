@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace Assets.Scripts.Game.LevelSystem
@@ -8,22 +7,17 @@ namespace Assets.Scripts.Game.LevelSystem
     {
         private const string Beginning = "Level";
 
+        [SerializeField] private LevelConfigsHub _levelConfigsHub;
         [SerializeField] private TextMeshProUGUI _text;
 
-        private LevelConfigsHub _levelConfigsHub;
-
-        public void Init(LevelConfigsHub levelConfigsHub)
+        private void OnEnable()
         {
-            if (levelConfigsHub == null)
-                throw new ArgumentNullException(nameof(levelConfigsHub));
-
-            _levelConfigsHub = levelConfigsHub;
             UpdateIndexView();
 
             _levelConfigsHub.IndexUpdated += UpdateIndexView;
         }
 
-        public void Dispose()
+        private void OnDisable()
         {
             _levelConfigsHub.IndexUpdated -= UpdateIndexView;
         }

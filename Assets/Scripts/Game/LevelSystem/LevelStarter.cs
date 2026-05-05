@@ -7,7 +7,10 @@ namespace Assets.Scripts.Game.LevelSystem
 {
     public class LevelStarter
     {
-        private CanvasSwitcher _canvasSwitcher;
+        private Level _level;
+        private LevelCompletedWindow _levelCompletedWindow;
+        private LevelFailedWindow _levelFailedWindow;
+
         private LevelConfigsHub _levelConfigsHub;
         private Pause _pauseMenu;
 
@@ -21,7 +24,9 @@ namespace Assets.Scripts.Game.LevelSystem
 
         public LevelStarter
             (
-            CanvasSwitcher canvasSwitcher,
+            Level level,
+            LevelCompletedWindow levelCompletedWindow,
+            LevelFailedWindow levelFailedWindow,
             LevelConfigsHub levelConfigsHub,
             Pause pauseMenu,
             LevelTimer levelTimer,
@@ -32,8 +37,12 @@ namespace Assets.Scripts.Game.LevelSystem
             LevelHoleScaler levelHoleScaler
             )
         {
-            if (canvasSwitcher == null)
-                throw new ArgumentNullException(nameof(canvasSwitcher));
+            if (level == null)
+                throw new ArgumentNullException(nameof(level));
+            if (levelCompletedWindow == null)
+                throw new ArgumentException(nameof(levelCompletedWindow));
+            if (levelFailedWindow == null)
+                throw new ArgumentException(nameof(levelFailedWindow));
             if (levelConfigsHub == null)
                 throw new ArgumentException(nameof(levelConfigsHub));
             if (pauseMenu == null)
@@ -51,7 +60,10 @@ namespace Assets.Scripts.Game.LevelSystem
             if (levelHoleScaler == null)
                 throw new ArgumentNullException(nameof(levelHoleScaler));
 
-            _canvasSwitcher = canvasSwitcher;
+            _level = level;
+            _levelCompletedWindow = levelCompletedWindow;
+            _levelFailedWindow = levelFailedWindow;
+
             _levelConfigsHub = levelConfigsHub;
             _pauseMenu = pauseMenu;
 
@@ -66,8 +78,7 @@ namespace Assets.Scripts.Game.LevelSystem
 
         public void StartLevel()
         {
-            _canvasSwitcher.OpenLevel();
-
+            _level.Open();
             LevelConfig currentLevelConfig = _levelConfigsHub.GetCurrent();
 
             _levelTimer.Start(currentLevelConfig.Time);
@@ -88,16 +99,16 @@ namespace Assets.Scripts.Game.LevelSystem
         {
             OnFinish();
 
-            _canvasSwitcher.CloseLevel();
-            _canvasSwitcher.OpenLevelCompletedWindow();
+            _level.Close();
+            _levelCompletedWindow.Open();
         }
 
         private void OnLevelFailed()
         {
             OnFinish();
 
-            _canvasSwitcher.CloseLevel();
-            _canvasSwitcher.OpenLevelFailedWindow();
+            _level.Close();
+            _levelFailedWindow.Open();
         }
 
         private void OnFinish()

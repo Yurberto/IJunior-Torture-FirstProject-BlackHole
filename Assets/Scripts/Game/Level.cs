@@ -1,28 +1,29 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Game.Interfases;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Game
 {
-    public class Level : MonoBehaviour
+    public class Level : MonoBehaviour, GameCanvas
     {
+        [SerializeField] private Pause _pause;
         [SerializeField] private Button _openPause;
 
-        [SerializeField] private CanvasSwitcher _canvasSwitcher;
-
-        private void OnEnable()
+        public void Open()
         {
+            gameObject.SetActive(true);
             _openPause.onClick.AddListener(OpenPause);
         }
 
-        private void OnDisable()
+        public void Close()
         {
+            gameObject.SetActive(false);
             _openPause.onClick.RemoveListener(OpenPause);
         }
 
         private void OpenPause()
         {
-            _canvasSwitcher.CloseLevel();
-            _canvasSwitcher.OpenPause();
+            _pause.Open();
         }
     }
 }

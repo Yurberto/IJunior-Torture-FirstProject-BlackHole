@@ -16,9 +16,12 @@ namespace Assets.Scripts.Game
     public class Bootstrapper : MonoBehaviour
     {
         [Header("Core")]
-        [SerializeField] private CanvasSwitcher _canvasSwitcher;
         [SerializeField] private MainMenu _mainMenu;
+        [SerializeField] private Level _level;
+        [SerializeField] private Settings _settings;
         [SerializeField] private Pause _pause;
+        [SerializeField] private LevelCompletedWindow _levelCompletedWindow;
+        [SerializeField] private LevelFailedWindow _levelFailedWindow;
 
         [Header("Camera")]
         [SerializeField] private TargetFollower _targetFollower;
@@ -54,9 +57,6 @@ namespace Assets.Scripts.Game
         [SerializeField] private LevelConfigsHub _levelConfigsHub;
 
         [SerializeField] private LevelRewardView _levelRewardView;
-        [SerializeField] private CurrentLevelNumberView _currentLevelView;
-        [SerializeField] private LevelCompletedWindow _levelCompletedWindow;
-        [SerializeField] private LevelFailedWindow _levelFailedWindow;
 
         [Header("Wallet")]
         [SerializeField] private WalletView _walletView;
@@ -150,7 +150,7 @@ namespace Assets.Scripts.Game
             _levelTimer = new LevelTimer(_timerService);
             _levelResultTracker = new LevelResultTracker(_absorber, _levelTimer);
             _adAwarder = new AdAwarder(_wallet, _money, _rewardsConfig);
-            _levelStarter = new LevelStarter(_canvasSwitcher, _levelConfigsHub, _pause, _levelTimer, _levelResultTracker, _holeMover, _absorbHandler, _absorbBar, _levelHoleScaler);
+            _levelStarter = new LevelStarter(_level, _levelCompletedWindow, _levelFailedWindow, _levelConfigsHub, _pause, _levelTimer, _levelResultTracker, _holeMover, _absorbHandler, _absorbBar, _levelHoleScaler);
 
             _mainMenu.Init(_levelStarter, _levelSpawner);
             _levelCompletedWindow.Init(_adAwarder, _levelAwarder, _levelSpawner);
@@ -158,7 +158,6 @@ namespace Assets.Scripts.Game
 
             _walletView.Init(_wallet);
             _levelRewardView.Init(_money);
-            _currentLevelView.Init(_levelConfigsHub);
 
             _addMoneyRewardView.Init(_money);
 
@@ -167,7 +166,7 @@ namespace Assets.Scripts.Game
 
             _mainMenu.Opened += _map.AdjustToCurrentLevel;
 
-            _canvasSwitcher.OpenMainMenu();
+            _mainMenu.Open();
         }
 
         private void OnApplicationQuit()
@@ -193,8 +192,6 @@ namespace Assets.Scripts.Game
             _gameHoleScaler.Dispose();
             _holeScalerView.UnSubscribe();
             _holeMover.StopMoving();
-
-            _currentLevelView.Dispose();
 
             _targetFollower.Dispose();
             _holeMover.Dispose();
